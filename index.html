@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0b0e" />
+    <meta name="description" content="观潮，一个本地的币安现货监控台。实时价格、K 线和技术面倾向，不构成投资建议。" />
+    <title>观潮 · 现货观察台</title>
+    <script>
+      try {
+        if (localStorage.getItem('guanchao.theme') === 'light') {
+          document.documentElement.dataset.theme = 'light'
+        }
+      } catch (e) {}
+    </script>
+    <style>
+      html, body { background: #0a0b0e; }
+      html[data-theme="light"], html[data-theme="light"] body { background: #f3f1ec; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
