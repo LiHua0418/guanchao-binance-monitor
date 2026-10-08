@@ -1,0 +1,91 @@
+{
+  "measuredAt": "2026-10-08T13:29:13.060251+00:00",
+  "interval": "1h",
+  "pytorch": "2.14.1+cu130",
+  "cudaVersion": "13.0",
+  "gpu": "NVIDIA GeForce RTX 5070",
+  "gpuMemoryBytes": 12792037376,
+  "precision": "float32; TF32 disabled; cudnn deterministic; AdamW+gradient clipping and both exact training losses",
+  "method": "Same frozen initial weights and same real training batch; five warmup and3x10 timed optimization steps on ephemeral copies. Batch already on target device; no data downloading, epoch selection, calibration or artifact fitting.",
+  "results": [
+    {
+      "device": "cpu",
+      "cpuThreads": 6,
+      "batchSize": 256,
+      "sequence": 64,
+      "featureCount": 57,
+      "warmupSteps": 5,
+      "stepsPerRepeat": 10,
+      "repeatSeconds": [
+        1.0973790999996709,
+        1.0876642000002903,
+        1.0567487000007532
+      ],
+      "medianSamplesPerSecond": 2353.6676117493953,
+      "medianMillisecondsPerStep": 108.76642000002903,
+      "lossAndParametersFinite": true
+    },
+    {
+      "device": "cuda",
+      "cpuThreads": 6,
+      "batchSize": 256,
+      "sequence": 64,
+      "featureCount": 57,
+      "warmupSteps": 5,
+      "stepsPerRepeat": 10,
+      "repeatSeconds": [
+        0.1126113999998779,
+        0.11215249999804655,
+        0.11471260000689654
+      ],
+      "medianSamplesPerSecond": 22733.04478945094,
+      "medianMillisecondsPerStep": 11.26113999998779,
+      "lossAndParametersFinite": true
+    }
+  ],
+  "gpuThroughputRelativeToCpu6": 9.658562099409737,
+  "frozenWeightCrossDeviceMaximumAbsoluteError": {
+    "logReturns": 1.7968928510934956e-09,
+    "upProbability": 6.413270575711394e-08,
+    "lowerLogReturns": 1.7968928532619e-09,
+    "upperLogReturns": 1.7968928532619e-09
+  },
+  "tolerances": {
+    "logReturns": 1e-06,
+    "upProbability": 1e-05
+  },
+  "existingWeightsAndManifestsUnchanged": true,
+  "protectedHashesBefore": {
+    "reports\\experiments\\b4-neural\\15m\\seed-20261008.pt": "3519329cf0b84ccb48c7adc5e00208294feca5c099bf00d9dac05484f348ebe7",
+    "reports\\experiments\\b4-neural\\15m\\seed-20261009.pt": "9e8cf712a5729e78b432bfa1a1cc2a24d6cbd03d039b09602e56459a7841888b",
+    "reports\\experiments\\b4-neural\\1d\\seed-20261008.pt": "2207072524bcc8c3aa520c68f155905d213e3120270c65f1ee9bf152dfa0dde1",
+    "reports\\experiments\\b4-neural\\1h\\seed-20261009.pt": "229bcf1958110a5cb69f75f81ec6ee674277e83a2b92d4da8ce4609d6ab73c71",
+    "reports\\experiments\\b4-neural\\4h\\seed-20261008.pt": "3a142dfddd2309e1b7ce132c34be24eaba21d7cfa36fd20186582933346e8fbe",
+    "reports\\experiments\\b4-neural\\4h\\seed-20261009.pt": "e187220a2704425b0eba4c1e74d7994deb77bdf08038fa2067d8ec29a0ead13a",
+    "reports\\experiments\\b4-neural\\15m\\manifest.json": "0556100d1e812fecda7e69f01e99eb24c902cbfbe74a2ff1224ee9dc3d80254e",
+    "reports\\experiments\\b4-neural\\1d\\manifest.json": "cd9b3ddc298810b0045b638aa097261445580f224455eaaccd3c3adcbe1f776d",
+    "reports\\experiments\\b4-neural\\1h\\manifest.json": "8ff990f95ad6494051559b5897c42834a5bac4c1701767a40f4df9c908126518",
+    "reports\\experiments\\b4-neural\\4h\\manifest.json": "2e8f23152aeeda5460f4e1efc6b9135d4bd9d39226fb907898b47d8f4155776d",
+    "public\\models\\b3-15m.json": "432902c5300a568e154abf46991081efcb6790cc05f97008207a0fee87ff27b9",
+    "public\\models\\b3-1d.json": "45f81d91ae3015f3fd993bf31529ba7b643df5dd090d0c69485b192025d8d30d",
+    "public\\models\\b3-1h.json": "01ee2a33b42d9434babe15a725a70ca916a2c7150ad18be011ac24e7a13ede5e",
+    "public\\models\\b3-4h.json": "cb6b1b3c52067deafd2e76060351150d19ced805b3c1ffded5d219cbaa236acb"
+  },
+  "protectedHashesAfter": {
+    "reports\\experiments\\b4-neural\\15m\\seed-20261008.pt": "3519329cf0b84ccb48c7adc5e00208294feca5c099bf00d9dac05484f348ebe7",
+    "reports\\experiments\\b4-neural\\15m\\seed-20261009.pt": "9e8cf712a5729e78b432bfa1a1cc2a24d6cbd03d039b09602e56459a7841888b",
+    "reports\\experiments\\b4-neural\\1d\\seed-20261008.pt": "2207072524bcc8c3aa520c68f155905d213e3120270c65f1ee9bf152dfa0dde1",
+    "reports\\experiments\\b4-neural\\1h\\seed-20261009.pt": "229bcf1958110a5cb69f75f81ec6ee674277e83a2b92d4da8ce4609d6ab73c71",
+    "reports\\experiments\\b4-neural\\4h\\seed-20261008.pt": "3a142dfddd2309e1b7ce132c34be24eaba21d7cfa36fd20186582933346e8fbe",
+    "reports\\experiments\\b4-neural\\4h\\seed-20261009.pt": "e187220a2704425b0eba4c1e74d7994deb77bdf08038fa2067d8ec29a0ead13a",
+    "reports\\experiments\\b4-neural\\15m\\manifest.json": "0556100d1e812fecda7e69f01e99eb24c902cbfbe74a2ff1224ee9dc3d80254e",
+    "reports\\experiments\\b4-neural\\1d\\manifest.json": "cd9b3ddc298810b0045b638aa097261445580f224455eaaccd3c3adcbe1f776d",
+    "reports\\experiments\\b4-neural\\1h\\manifest.json": "8ff990f95ad6494051559b5897c42834a5bac4c1701767a40f4df9c908126518",
+    "reports\\experiments\\b4-neural\\4h\\manifest.json": "2e8f23152aeeda5460f4e1efc6b9135d4bd9d39226fb907898b47d8f4155776d",
+    "public\\models\\b3-15m.json": "432902c5300a568e154abf46991081efcb6790cc05f97008207a0fee87ff27b9",
+    "public\\models\\b3-1d.json": "45f81d91ae3015f3fd993bf31529ba7b643df5dd090d0c69485b192025d8d30d",
+    "public\\models\\b3-1h.json": "01ee2a33b42d9434babe15a725a70ca916a2c7150ad18be011ac24e7a13ede5e",
+    "public\\models\\b3-4h.json": "cb6b1b3c52067deafd2e76060351150d19ced805b3c1ffded5d219cbaa236acb"
+  },
+  "limitation": "Microbenchmark excludes data preparation, per-batch indexing, validation and per-step logging synchronization; it does not imply accuracy improvement or the same speedup for full training or single-candle live inference."
+}

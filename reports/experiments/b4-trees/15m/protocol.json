@@ -1,0 +1,313 @@
+{
+  "startedAt": "2026-10-08T12:34:55.135520+00:00",
+  "interval": "15m",
+  "seed": 20261008,
+  "catboostVersion": "1.2.10",
+  "features": [
+    "logReturn1",
+    "logReturn2",
+    "logReturn3",
+    "logReturn6",
+    "logReturn12",
+    "logReturn24",
+    "logReturn48",
+    "volatility12",
+    "volatility24",
+    "volatility48",
+    "rangeRatio",
+    "bodyRatio",
+    "upperWickRatio",
+    "lowerWickRatio",
+    "closeWithinCandle",
+    "sma5Distance",
+    "sma10Distance",
+    "sma20Distance",
+    "sma50Distance",
+    "sma100Distance",
+    "baseVolumeRelative20",
+    "baseVolumeRelative50",
+    "baseVolumeLogChange",
+    "quoteVolumeRelative20",
+    "quoteVolumeRelative50",
+    "quoteVolumeLogChange",
+    "takerImbalanceLag0",
+    "takerImbalanceLag1",
+    "takerImbalanceLag2",
+    "takerImbalanceLag3",
+    "takerImbalanceMean3",
+    "takerImbalanceMean6",
+    "takerImbalanceMean12",
+    "tradeCountLogChange",
+    "tradeCountRelative20",
+    "tradeCountRelative50",
+    "averageTradeLogChange",
+    "utcTimeSin",
+    "utcTimeCos",
+    "utcWeekSin",
+    "utcWeekCos",
+    "volNormalizedReturn1",
+    "volNormalizedReturn2",
+    "volNormalizedReturn3",
+    "volNormalizedReturn6",
+    "volNormalizedReturn12",
+    "volNormalizedReturn24",
+    "volNormalizedReturn48",
+    "rsi14Centered",
+    "logPriceZScore20",
+    "logPriceZScore50",
+    "meanRange12",
+    "meanRange24",
+    "volatilityRatio12to48",
+    "logVolatility48",
+    "vwapDistance",
+    "bodyTakerInteraction",
+    "symbol_BTCUSDT",
+    "symbol_ETHUSDT",
+    "symbol_BNBUSDT",
+    "symbol_SOLUSDT"
+  ],
+  "featureSource": "b4_data.py causal raw features plus four fixed symbol one-hot features",
+  "featureTransforms": "No fitted feature scaling for trees; only train-fitted CatBoost thresholds. Causal origin vol normalizes targets.",
+  "target": "Direct cumulative log return at every h1..h12, scaled by causal48barVol*sqrt(h); training target clipped to +/-8, evaluation never clipped; exact-zero returns excluded from classification training/metrics",
+  "configurations": [
+    {
+      "name": "depth4-l2-30",
+      "depth": 4,
+      "l2_leaf_reg": 30
+    },
+    {
+      "name": "depth6-l2-60",
+      "depth": 6,
+      "l2_leaf_reg": 60
+    }
+  ],
+  "maxIterations": 600,
+  "earlyStoppingRounds": 60,
+  "heads": [
+    "normalized-return RMSE",
+    "positive-return Logloss"
+  ],
+  "cpuThreads": 6,
+  "walkForwardFolds": [
+    {
+      "training": [
+        "train"
+      ],
+      "earlyStopping": "tune",
+      "validation": "val1"
+    },
+    {
+      "training": [
+        "train",
+        "tune"
+      ],
+      "earlyStopping": "val1",
+      "validation": "val2"
+    },
+    {
+      "training": [
+        "train",
+        "tune",
+        "val1"
+      ],
+      "earlyStopping": "val2",
+      "validation": "val3"
+    }
+  ],
+  "selection": "Only h1 determines depth/l2 and median early-stopped iterations; score=.6 Brier/trainPriorBrier+.4 returnMSE/zeroMSE averaged over3 expanding folds.",
+  "finalFit": "Freeze winning configuration and median CV tree counts; refit train+tune+val1+val2+val3. No early stopping on calibration/test.",
+  "calibration": "Separate 85-90% partition; Platt logistic mapping of direction logits (C=1), no test feedback; signed normalized residual quantiles",
+  "remainingHorizons": "Use exactly selected h1 configuration and fixed per-head tree count for h2..h12 return heads and h3,h6,h12 direction heads; no horizon-dependent search or interpolation.",
+  "gate": "Return: mean CV R2>0, mean IC>.02,2/3 folds positive IC/R2; Direction: mean CV BA>.51,2/3 BA>.5, mean Brier better than train prior",
+  "holdoutStatus": "Expanded-history final partition may overlap previously inspected experiments; this is historical reevaluation, not untouched external evidence.",
+  "deployment": "Experimental artifacts only. No deployed weights or src modification.",
+  "dataMetadata": {
+    "interval": "15m",
+    "sources": {
+      "SOLUSDT": {
+        "bars": 40000,
+        "first": "2025-08-17T20:30:00Z",
+        "last": "2026-10-08T12:15:00Z",
+        "sha256": "d53f0f4340333ddebed06944348cdebe539ce6e2e7b52446cd6cd16a034a545c",
+        "path": ".cache\\training-expanded\\SOLUSDT-15m-40000-1791461700000.json",
+        "reusedBars": 40000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "BTCUSDT": {
+        "bars": 40000,
+        "first": "2025-08-17T20:30:00Z",
+        "last": "2026-10-08T12:15:00Z",
+        "sha256": "85c131f85c2b2ebe56feef79baecc15818d3bb6d6a2c64983d631f924088a7de",
+        "path": ".cache\\training-expanded\\BTCUSDT-15m-40000-1791461700000.json",
+        "reusedBars": 40000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "ETHUSDT": {
+        "bars": 40000,
+        "first": "2025-08-17T20:30:00Z",
+        "last": "2026-10-08T12:15:00Z",
+        "sha256": "b8290afb45b507ef3725bff180bdc4cfdf5435c2772047b613a55ac580c26b29",
+        "path": ".cache\\training-expanded\\ETHUSDT-15m-40000-1791461700000.json",
+        "reusedBars": 40000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "BNBUSDT": {
+        "bars": 40000,
+        "first": "2025-08-17T20:30:00Z",
+        "last": "2026-10-08T12:15:00Z",
+        "sha256": "9b25d745add310b5a21276f3dfbeae9acc37dabf0a004e6f95cb7d2394939860",
+        "path": ".cache\\training-expanded\\BNBUSDT-15m-40000-1791461700000.json",
+        "reusedBars": 40000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      }
+    },
+    "cutoff": 1791462707086,
+    "cutoffIso": "2026-10-08T12:31:47.086000Z",
+    "features": [
+      "logReturn1",
+      "logReturn2",
+      "logReturn3",
+      "logReturn6",
+      "logReturn12",
+      "logReturn24",
+      "logReturn48",
+      "volatility12",
+      "volatility24",
+      "volatility48",
+      "rangeRatio",
+      "bodyRatio",
+      "upperWickRatio",
+      "lowerWickRatio",
+      "closeWithinCandle",
+      "sma5Distance",
+      "sma10Distance",
+      "sma20Distance",
+      "sma50Distance",
+      "sma100Distance",
+      "baseVolumeRelative20",
+      "baseVolumeRelative50",
+      "baseVolumeLogChange",
+      "quoteVolumeRelative20",
+      "quoteVolumeRelative50",
+      "quoteVolumeLogChange",
+      "takerImbalanceLag0",
+      "takerImbalanceLag1",
+      "takerImbalanceLag2",
+      "takerImbalanceLag3",
+      "takerImbalanceMean3",
+      "takerImbalanceMean6",
+      "takerImbalanceMean12",
+      "tradeCountLogChange",
+      "tradeCountRelative20",
+      "tradeCountRelative50",
+      "averageTradeLogChange",
+      "utcTimeSin",
+      "utcTimeCos",
+      "utcWeekSin",
+      "utcWeekCos",
+      "volNormalizedReturn1",
+      "volNormalizedReturn2",
+      "volNormalizedReturn3",
+      "volNormalizedReturn6",
+      "volNormalizedReturn12",
+      "volNormalizedReturn24",
+      "volNormalizedReturn48",
+      "rsi14Centered",
+      "logPriceZScore20",
+      "logPriceZScore50",
+      "meanRange12",
+      "meanRange24",
+      "volatilityRatio12to48",
+      "logVolatility48",
+      "vwapDistance",
+      "bodyTakerInteraction"
+    ],
+    "featureCount": 57,
+    "boundaryMs": [
+      1777120200000,
+      1780705800000,
+      1782498600000,
+      1784291400000,
+      1786084200000,
+      1787877000000
+    ],
+    "boundaries": [
+      "2026-04-25T12:30:00Z",
+      "2026-06-06T00:30:00Z",
+      "2026-06-26T18:30:00Z",
+      "2026-07-17T12:30:00Z",
+      "2026-08-07T06:30:00Z",
+      "2026-08-28T00:30:00Z"
+    ],
+    "partitions": {
+      "train": {
+        "samples": 95560,
+        "firstOrigin": "2025-08-19T13:00:00Z",
+        "lastOrigin": "2026-04-25T09:15:00Z",
+        "lastTarget": "2026-04-25T12:15:00Z"
+      },
+      "tune": {
+        "samples": 15888,
+        "firstOrigin": "2026-04-25T12:30:00Z",
+        "lastOrigin": "2026-06-05T21:15:00Z",
+        "lastTarget": "2026-06-06T00:15:00Z"
+      },
+      "val1": {
+        "samples": 7920,
+        "firstOrigin": "2026-06-06T00:30:00Z",
+        "lastOrigin": "2026-06-26T15:15:00Z",
+        "lastTarget": "2026-06-26T18:15:00Z"
+      },
+      "val2": {
+        "samples": 7920,
+        "firstOrigin": "2026-06-26T18:30:00Z",
+        "lastOrigin": "2026-07-17T09:15:00Z",
+        "lastTarget": "2026-07-17T12:15:00Z"
+      },
+      "val3": {
+        "samples": 7920,
+        "firstOrigin": "2026-07-17T12:30:00Z",
+        "lastOrigin": "2026-08-07T03:15:00Z",
+        "lastTarget": "2026-08-07T06:15:00Z"
+      },
+      "calibration": {
+        "samples": 7920,
+        "firstOrigin": "2026-08-07T06:30:00Z",
+        "lastOrigin": "2026-08-27T21:15:00Z",
+        "lastTarget": "2026-08-28T00:15:00Z"
+      },
+      "test": {
+        "samples": 15888,
+        "firstOrigin": "2026-08-28T00:30:00Z",
+        "lastOrigin": "2026-10-08T09:15:00Z",
+        "lastTarget": "2026-10-08T12:15:00Z"
+      }
+    },
+    "commonStart": "2025-08-19T13:00:00Z",
+    "commonEndExclusive": "2026-10-08T12:30:00Z",
+    "purgeBars": 12,
+    "maxSequence": 64,
+    "featureWarmup": 99,
+    "normalization": "Mean/std fitted only on feature rows in train calendar partition; clip +/-12.",
+    "target": "Next 1..12 closed-bar cumulative log returns; y_norm=y/(causal sigma48*sqrt(horizon)).",
+    "directionLabels": "Consumer-selected flat threshold on y_norm; never selected on final partition.",
+    "validation": "tune selects checkpoints; val1/val2/val3 are successive walk-forward blocks; refit uses only earlier targets.",
+    "knownLimitation": "Recent history overlaps prior inspected experiments. The final partition is historical reevaluation, not an untouched future test.",
+    "checks": {
+      "closedCandles": true,
+      "continuousTime": true,
+      "prefixCausality": true,
+      "targetPurge": true
+    },
+    "datasetPath": ".cache\\training-expanded\\15m-dataset.npz",
+    "datasetSha256": "5883fe9cf1184d38f8c708c0b256a8b63e692295b29c5a9ee798b7ff93f8928a"
+  }
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "interval": "15m",
+    "symbol": "BTCUSDT",
+    "sha256": "74e84a823ad29bfbcab1a27516fd008c8b82f52b671c4b3f1113fed0f71040b3",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "15m",
+    "symbol": "ETHUSDT",
+    "sha256": "8b6d7a0672b7bf6b4bb6acbd4dca4448a109a027a8363380552c30cea72e2def",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "15m",
+    "symbol": "BNBUSDT",
+    "sha256": "14375f01377120fd776e0c050a01a40dd7eb4bf52d7ddb693f85efdc59a1a152",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "15m",
+    "symbol": "SOLUSDT",
+    "sha256": "80c76e54ae2d5bb508f52190b80190ea84b2366ffddaadb01229e2dba121ae67",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "1h",
+    "symbol": "BTCUSDT",
+    "sha256": "ea085a05065a23584bc1522a34ebfdba892058e0f8d6718854160e21b3ac8397",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "1h",
+    "symbol": "ETHUSDT",
+    "sha256": "c651e14670e6414c2673c8fcf9569f49f0d820746fb8618126b005988407fd09",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "1h",
+    "symbol": "BNBUSDT",
+    "sha256": "cd8cbe6c25ed14f51d36a2871d6ef287d407e441e78c696d9fd7ead60ee34b00",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "1h",
+    "symbol": "SOLUSDT",
+    "sha256": "1037213913274d2d23a14ecc22e4fce2e4ff1d2bc809b760f2090ef29d4f2dde",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "4h",
+    "symbol": "BTCUSDT",
+    "sha256": "dd9e20c6d00cc65f4b377ad7a881649bdc457966cbbab7da05db9f7022914b20",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "4h",
+    "symbol": "ETHUSDT",
+    "sha256": "220c5d998bf231168515bbbbe5c223f4b465f57e3da9079bd8b3a19eaa9f319c",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "4h",
+    "symbol": "BNBUSDT",
+    "sha256": "d3478d3905db83c468cce4e217b210a924cccb365e90cc7054e92504afc859d7",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "4h",
+    "symbol": "SOLUSDT",
+    "sha256": "eadf7ce5528be72492b44a721bdbba3a2abeb79a501f47a7b1eeeda915f7ba50",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "1d",
+    "symbol": "BTCUSDT",
+    "sha256": "2cd3c6500212c7da055a2cc5cabbd623976eb0edf0ed7a8eaa6266f5f9f11965",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "1d",
+    "symbol": "ETHUSDT",
+    "sha256": "a1c3cc156e4664622de0614f83ea12dada965b58752ad6aa67440fb0a91338bf",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "1d",
+    "symbol": "BNBUSDT",
+    "sha256": "0d631f2726db497af5a6cbbd30d28e46d257d077e859a1b20e4a02403c2a6c5e",
+    "matchesOriginalReport": true
+  },
+  {
+    "interval": "1d",
+    "symbol": "SOLUSDT",
+    "sha256": "2c1c2853a7530ede574fa78aea686029976061f8169d2645b2b9955379a2697f",
+    "matchesOriginalReport": true
+  }
+]

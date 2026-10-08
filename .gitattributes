@@ -1,0 +1,6 @@
+# Preserve frozen model artifacts byte-for-byte across Windows and Unix clones.
+*.cbm binary
+*.npz binary
+*.pt binary
+public/models/*.json -text whitespace=cr-at-eol
+reports/**/*.json -text whitespace=cr-at-eol

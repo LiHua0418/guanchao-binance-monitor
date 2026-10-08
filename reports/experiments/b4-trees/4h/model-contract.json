@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 1,
+  "family": "b4-catboost-direct-return-and-direction",
+  "interval": "4h",
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "featureNames": [
+    "logReturn1",
+    "logReturn2",
+    "logReturn3",
+    "logReturn6",
+    "logReturn12",
+    "logReturn24",
+    "logReturn48",
+    "volatility12",
+    "volatility24",
+    "volatility48",
+    "rangeRatio",
+    "bodyRatio",
+    "upperWickRatio",
+    "lowerWickRatio",
+    "closeWithinCandle",
+    "sma5Distance",
+    "sma10Distance",
+    "sma20Distance",
+    "sma50Distance",
+    "sma100Distance",
+    "baseVolumeRelative20",
+    "baseVolumeRelative50",
+    "baseVolumeLogChange",
+    "quoteVolumeRelative20",
+    "quoteVolumeRelative50",
+    "quoteVolumeLogChange",
+    "takerImbalanceLag0",
+    "takerImbalanceLag1",
+    "takerImbalanceLag2",
+    "takerImbalanceLag3",
+    "takerImbalanceMean3",
+    "takerImbalanceMean6",
+    "takerImbalanceMean12",
+    "tradeCountLogChange",
+    "tradeCountRelative20",
+    "tradeCountRelative50",
+    "averageTradeLogChange",
+    "utcTimeSin",
+    "utcTimeCos",
+    "utcWeekSin",
+    "utcWeekCos",
+    "volNormalizedReturn1",
+    "volNormalizedReturn2",
+    "volNormalizedReturn3",
+    "volNormalizedReturn6",
+    "volNormalizedReturn12",
+    "volNormalizedReturn24",
+    "volNormalizedReturn48",
+    "rsi14Centered",
+    "logPriceZScore20",
+    "logPriceZScore50",
+    "meanRange12",
+    "meanRange24",
+    "volatilityRatio12to48",
+    "logVolatility48",
+    "vwapDistance",
+    "bodyTakerInteraction",
+    "symbol_BTCUSDT",
+    "symbol_ETHUSDT",
+    "symbol_BNBUSDT",
+    "symbol_SOLUSDT"
+  ],
+  "featureModule": "scripts/b4_data.py",
+  "rawFeatureOrder": [
+    "logReturn1",
+    "logReturn2",
+    "logReturn3",
+    "logReturn6",
+    "logReturn12",
+    "logReturn24",
+    "logReturn48",
+    "volatility12",
+    "volatility24",
+    "volatility48",
+    "rangeRatio",
+    "bodyRatio",
+    "upperWickRatio",
+    "lowerWickRatio",
+    "closeWithinCandle",
+    "sma5Distance",
+    "sma10Distance",
+    "sma20Distance",
+    "sma50Distance",
+    "sma100Distance",
+    "baseVolumeRelative20",
+    "baseVolumeRelative50",
+    "baseVolumeLogChange",
+    "quoteVolumeRelative20",
+    "quoteVolumeRelative50",
+    "quoteVolumeLogChange",
+    "takerImbalanceLag0",
+    "takerImbalanceLag1",
+    "takerImbalanceLag2",
+    "takerImbalanceLag3",
+    "takerImbalanceMean3",
+    "takerImbalanceMean6",
+    "takerImbalanceMean12",
+    "tradeCountLogChange",
+    "tradeCountRelative20",
+    "tradeCountRelative50",
+    "averageTradeLogChange",
+    "utcTimeSin",
+    "utcTimeCos",
+    "utcWeekSin",
+    "utcWeekCos",
+    "volNormalizedReturn1",
+    "volNormalizedReturn2",
+    "volNormalizedReturn3",
+    "volNormalizedReturn6",
+    "volNormalizedReturn12",
+    "volNormalizedReturn24",
+    "volNormalizedReturn48",
+    "rsi14Centered",
+    "logPriceZScore20",
+    "logPriceZScore50",
+    "meanRange12",
+    "meanRange24",
+    "volatilityRatio12to48",
+    "logVolatility48",
+    "vwapDistance",
+    "bodyTakerInteraction"
+  ],
+  "symbolOrder": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT"
+  ],
+  "input": "raw causal feature row at last fully closed candle plus four symbol one-hot values",
+  "returnDecode": "rawRegressionOutput*originVolatility48*sqrt(h); price=lastClose*exp(decodedLogReturn)",
+  "directionDecode": "rawClassificationLogit -> sigmoid(calibrationSlope*logit+calibrationIntercept)",
+  "intermediateHorizons": "Every h1..h12 has its own directly trained regression model; no interpolation",
+  "directionHorizons": [
+    1,
+    3,
+    6,
+    12
+  ],
+  "models": {
+    "h1-return": {
+      "cbm": "h1-return.cbm",
+      "json": "h1-return.json",
+      "sha256": "72718598e4da5353037a9a79719761531014178c93a163d66ccf167fdeed38eb",
+      "trees": 192
+    },
+    "h1-direction": {
+      "cbm": "h1-direction.cbm",
+      "json": "h1-direction.json",
+      "sha256": "5bf475a314b14169e4c65a324e09b62376dca547ff02bb98b3039b4589cf89b3",
+      "trees": 45
+    },
+    "h2-return": {
+      "cbm": "h2-return.cbm",
+      "json": "h2-return.json",
+      "sha256": "5ef74b3eb539f9d3864a4367134f1e0147039e5f7e3568c500af946bee5b1a73",
+      "trees": 192
+    },
+    "h3-return": {
+      "cbm": "h3-return.cbm",
+      "json": "h3-return.json",
+      "sha256": "6d4e85d2388124532242091b089287222be9fc9775cd036b7449c4e53c339b95",
+      "trees": 192
+    },
+    "h3-direction": {
+      "cbm": "h3-direction.cbm",
+      "json": "h3-direction.json",
+      "sha256": "361a2b581c81404277c8b41facc86f9b23fd51a37c4bfacec035feae1f274315",
+      "trees": 45
+    },
+    "h4-return": {
+      "cbm": "h4-return.cbm",
+      "json": "h4-return.json",
+      "sha256": "4b0d8b74f38ed71460bf79f353e77f4a8e82867bc57341caecb62167216e9c8b",
+      "trees": 192
+    },
+    "h5-return": {
+      "cbm": "h5-return.cbm",
+      "json": "h5-return.json",
+      "sha256": "7dd17e7b67c48f2899e7a64a9d4a71b0a47fa7b2647fe290c6f029b750319e48",
+      "trees": 192
+    },
+    "h6-return": {
+      "cbm": "h6-return.cbm",
+      "json": "h6-return.json",
+      "sha256": "8f9ce1fa2ad25a655fe3d91943f1182df5a2c2468424f6d1434839e8e1602e2d",
+      "trees": 192
+    },
+    "h6-direction": {
+      "cbm": "h6-direction.cbm",
+      "json": "h6-direction.json",
+      "sha256": "fdf4895e47dbf4fc3e6adac48b51728a5810b0f34bff052699c23cb66190f5a3",
+      "trees": 45
+    },
+    "h7-return": {
+      "cbm": "h7-return.cbm",
+      "json": "h7-return.json",
+      "sha256": "f6938a2084ffed5a9c5650e292278cca4090575d55101de4a24144aa5e4a32a5",
+      "trees": 192
+    },
+    "h8-return": {
+      "cbm": "h8-return.cbm",
+      "json": "h8-return.json",
+      "sha256": "24cb3414c15bd4b47de5e140c0d6a0950201b945288823c237f959d18ea5c8fe",
+      "trees": 192
+    },
+    "h9-return": {
+      "cbm": "h9-return.cbm",
+      "json": "h9-return.json",
+      "sha256": "836a1e42afaa9146c2d84ed6595393118e9cfd2196eae3de6d8552dcedfdc4ce",
+      "trees": 192
+    },
+    "h10-return": {
+      "cbm": "h10-return.cbm",
+      "json": "h10-return.json",
+      "sha256": "27a346ce6572fce6660681a63569fb531ce886a9c2d03a0198a4112d901aa4dd",
+      "trees": 192
+    },
+    "h11-return": {
+      "cbm": "h11-return.cbm",
+      "json": "h11-return.json",
+      "sha256": "cbc3264019c3a870b704df037fac4483327305230660bed00cf2510bfea7cbcc",
+      "trees": 192
+    },
+    "h12-return": {
+      "cbm": "h12-return.cbm",
+      "json": "h12-return.json",
+      "sha256": "387d7d751b9343cc9a48c0bf15e39453d571d44b1376e231dc5f2d48c92c1d29",
+      "trees": 192
+    },
+    "h12-direction": {
+      "cbm": "h12-direction.cbm",
+      "json": "h12-direction.json",
+      "sha256": "e37f8389dafa6ca3eb3c08ad5092576af084b099fac96e60e5b7ee86e3f210e3",
+      "trees": 45
+    }
+  },
+  "calibration": {
+    "h1": {
+      "slope": 0.4356203702947903,
+      "intercept": 0.01640458901503365
+    },
+    "h3": {
+      "slope": 1.0489838499411956,
+      "intercept": -0.113831709386557
+    },
+    "h6": {
+      "slope": 0.9471752432767034,
+      "intercept": -0.17550628258696985
+    },
+    "h12": {
+      "slope": -0.01875162306353787,
+      "intercept": -0.2950001187811061
+    }
+  },
+  "residualQuantiles": {
+    "h1": [
+      -1.2425826738560564,
+      0.013646145492205806,
+      1.0425057704144218
+    ],
+    "h2": [
+      -1.3368951553116477,
+      -0.0066596023899469685,
+      1.108524050803029
+    ],
+    "h3": [
+      -1.379057821470971,
+      -0.03427162483748594,
+      1.0900737935329776
+    ],
+    "h4": [
+      -1.4875979653267781,
+      -0.043297005628036664,
+      1.065060182850805
+    ],
+    "h5": [
+      -1.4653986105153967,
+      -0.05371302542235133,
+      1.0885522697397643
+    ],
+    "h6": [
+      -1.5029547119311368,
+      -0.06305250195703749,
+      1.0494493380818017
+    ],
+    "h7": [
+      -1.468198285745045,
+      -0.07229120698076333,
+      1.033380466338723
+    ],
+    "h8": [
+      -1.5854566075390235,
+      -0.11392979862520597,
+      1.0315648639642307
+    ],
+    "h9": [
+      -1.6237035783018205,
+      -0.10857509684477805,
+      1.0386890018739312
+    ],
+    "h10": [
+      -1.647730999334139,
+      -0.10552435237209795,
+      1.0271126524627063
+    ],
+    "h11": [
+      -1.6704783003834913,
+      -0.13759519566621278,
+      1.0443773792447129
+    ],
+    "h12": [
+      -1.6471945720258219,
+      -0.1480313334447077,
+      1.0410629539977603
+    ]
+  },
+  "selectionGate": {
+    "returnEligible": true,
+    "directionEligible": true,
+    "eligible": true,
+    "meanBalancedAccuracy": 0.5215600035147597,
+    "meanReturnIc": 0.045615463614632014,
+    "meanReturnR2VsZero": 0.0022003237683696866
+  },
+  "dataMetadata": {
+    "interval": "4h",
+    "sources": {
+      "BNBUSDT": {
+        "bars": 14000,
+        "first": "2020-05-19T04:00:00Z",
+        "last": "2026-10-08T08:00:00Z",
+        "sha256": "aa3f8041a3d5fc864ee8bd8e1a8232cb0bfd1691b0a94d57fa926ae17ca0629e",
+        "path": ".cache\\training-expanded\\BNBUSDT-4h-14000-1791446400000.json",
+        "reusedBars": 14000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "ETHUSDT": {
+        "bars": 14000,
+        "first": "2020-05-19T04:00:00Z",
+        "last": "2026-10-08T08:00:00Z",
+        "sha256": "0b3c58c73d52a62e73de037edb39f51ff1161d9311d607050a6ea6ac11840899",
+        "path": ".cache\\training-expanded\\ETHUSDT-4h-14000-1791446400000.json",
+        "reusedBars": 14000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "BTCUSDT": {
+        "bars": 14000,
+        "first": "2020-05-19T04:00:00Z",
+        "last": "2026-10-08T08:00:00Z",
+        "sha256": "4ecc843a64727fab446ed4539ad104b8d3ceda9558f8f3d32fc19aa1e34e6d10",
+        "path": ".cache\\training-expanded\\BTCUSDT-4h-14000-1791446400000.json",
+        "reusedBars": 14000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "SOLUSDT": {
+        "bars": 13496,
+        "first": "2020-08-11T04:00:00Z",
+        "last": "2026-10-08T08:00:00Z",
+        "sha256": "c2adcf28698ae99584e3621f6d23925c9afd69adf39beceb328140a7c639bbc1",
+        "path": ".cache\\training-expanded\\SOLUSDT-4h-14000-1791446400000.json",
+        "reusedBars": 13496,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      }
+    },
+    "cutoff": 1791462707086,
+    "cutoffIso": "2026-10-08T12:31:47.086000Z",
+    "features": [
+      "logReturn1",
+      "logReturn2",
+      "logReturn3",
+      "logReturn6",
+      "logReturn12",
+      "logReturn24",
+      "logReturn48",
+      "volatility12",
+      "volatility24",
+      "volatility48",
+      "rangeRatio",
+      "bodyRatio",
+      "upperWickRatio",
+      "lowerWickRatio",
+      "closeWithinCandle",
+      "sma5Distance",
+      "sma10Distance",
+      "sma20Distance",
+      "sma50Distance",
+      "sma100Distance",
+      "baseVolumeRelative20",
+      "baseVolumeRelative50",
+      "baseVolumeLogChange",
+      "quoteVolumeRelative20",
+      "quoteVolumeRelative50",
+      "quoteVolumeLogChange",
+      "takerImbalanceLag0",
+      "takerImbalanceLag1",
+      "takerImbalanceLag2",
+      "takerImbalanceLag3",
+      "takerImbalanceMean3",
+      "takerImbalanceMean6",
+      "takerImbalanceMean12",
+      "tradeCountLogChange",
+      "tradeCountRelative20",
+      "tradeCountRelative50",
+      "averageTradeLogChange",
+      "utcTimeSin",
+      "utcTimeCos",
+      "utcWeekSin",
+      "utcWeekCos",
+      "volNormalizedReturn1",
+      "volNormalizedReturn2",
+      "volNormalizedReturn3",
+      "volNormalizedReturn6",
+      "volNormalizedReturn12",
+      "volNormalizedReturn24",
+      "volNormalizedReturn48",
+      "rsi14Centered",
+      "logPriceZScore20",
+      "logPriceZScore50",
+      "meanRange12",
+      "meanRange24",
+      "volatilityRatio12to48",
+      "logVolatility48",
+      "vwapDistance",
+      "bodyTakerInteraction"
+    ],
+    "featureCount": 57,
+    "boundaryMs": [
+      1714651200000,
+      1733846400000,
+      1743451200000,
+      1753056000000,
+      1762646400000,
+      1772251200000
+    ],
+    "boundaries": [
+      "2024-05-02T12:00:00Z",
+      "2024-12-10T16:00:00Z",
+      "2025-03-31T20:00:00Z",
+      "2025-07-21T00:00:00Z",
+      "2025-11-09T00:00:00Z",
+      "2026-02-28T04:00:00Z"
+    ],
+    "partitions": {
+      "train": {
+        "samples": 31952,
+        "firstOrigin": "2020-09-07T04:00:00Z",
+        "lastOrigin": "2024-04-30T08:00:00Z",
+        "lastTarget": "2024-05-02T08:00:00Z"
+      },
+      "tune": {
+        "samples": 5284,
+        "firstOrigin": "2024-05-02T12:00:00Z",
+        "lastOrigin": "2024-12-08T12:00:00Z",
+        "lastTarget": "2024-12-10T12:00:00Z"
+      },
+      "val1": {
+        "samples": 2620,
+        "firstOrigin": "2024-12-10T16:00:00Z",
+        "lastOrigin": "2025-03-29T16:00:00Z",
+        "lastTarget": "2025-03-31T16:00:00Z"
+      },
+      "val2": {
+        "samples": 2620,
+        "firstOrigin": "2025-03-31T20:00:00Z",
+        "lastOrigin": "2025-07-18T20:00:00Z",
+        "lastTarget": "2025-07-20T20:00:00Z"
+      },
+      "val3": {
+        "samples": 2616,
+        "firstOrigin": "2025-07-21T00:00:00Z",
+        "lastOrigin": "2025-11-06T20:00:00Z",
+        "lastTarget": "2025-11-08T20:00:00Z"
+      },
+      "calibration": {
+        "samples": 2620,
+        "firstOrigin": "2025-11-09T00:00:00Z",
+        "lastOrigin": "2026-02-26T00:00:00Z",
+        "lastTarget": "2026-02-28T00:00:00Z"
+      },
+      "test": {
+        "samples": 5288,
+        "firstOrigin": "2026-02-28T04:00:00Z",
+        "lastOrigin": "2026-10-06T08:00:00Z",
+        "lastTarget": "2026-10-08T08:00:00Z"
+      }
+    },
+    "commonStart": "2020-09-07T04:00:00Z",
+    "commonEndExclusive": "2026-10-08T12:00:00Z",
+    "purgeBars": 12,
+    "maxSequence": 64,
+    "featureWarmup": 99,
+    "normalization": "Mean/std fitted only on feature rows in train calendar partition; clip +/-12.",
+    "target": "Next 1..12 closed-bar cumulative log returns; y_norm=y/(causal sigma48*sqrt(horizon)).",
+    "directionLabels": "Consumer-selected flat threshold on y_norm; never selected on final partition.",
+    "validation": "tune selects checkpoints; val1/val2/val3 are successive walk-forward blocks; refit uses only earlier targets.",
+    "knownLimitation": "Recent history overlaps prior inspected experiments. The final partition is historical reevaluation, not an untouched future test.",
+    "checks": {
+      "closedCandles": true,
+      "continuousTime": true,
+      "prefixCausality": true,
+      "targetPurge": true
+    },
+    "datasetPath": ".cache\\training-expanded\\4h-dataset.npz",
+    "datasetSha256": "9473e495dd1e4a861cddd42fcd391e897a7ed685486204b262f9c3912a1bd1bd"
+  }
+}

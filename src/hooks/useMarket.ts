@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { fetchKlines, fetchTicker, fetchTickers, mergeCandle, openStream, toSeconds, ApiError } from '../lib/binance'
+import { bufferCandle, candlesNeedBackfill, fetchKlines, fetchTicker, fetchTickers, mergeCandle, openStream, toSeconds, ApiError } from '../lib/binance'
 import { baseAsset, normalizeSymbol } from '../lib/format'
 import {
   LEGACY_USDT_SYMBOLS,
+  INTERVAL_MS,
   QUOTE_MARKETS,
   symbolsForQuote,
   type Candle,
@@ -29,6 +30,11 @@ type KlineEvent = {
     l: string
     c: string
     v: string
+    q?: string
+    n?: number
+    V?: string
+    Q?: string
+    x?: boolean
   }
 }
 
@@ -91,16 +97,12 @@ export function useMarket() {
 
   const selectedRef = useRef(selected)
   const timeframeRef = useRef(timeframe)
-  const readyKeyRef = useRef('')
   const requestKey = `${selected}|${timeframe}`
-
-  const pendingKline = useRef<Candle | null>(null)
 
   useEffect(() => {
     selectedRef.current = selected
     timeframeRef.current = timeframe
-    readyKeyRef.current = readyKey
-  }, [selected, timeframe, readyKey])
+  }, [selected, timeframe])
 
   useEffect(() => {
     const id = window.setInterval(() => setClock(new Date()), 1000)
@@ -180,56 +182,84 @@ export function useMarket() {
   }, [symbols])
 
   useEffect(() => {
-    const ac = new AbortController()
     const key = requestKey
-    let ignore = false
-    let retryTimer = 0
-    pendingKline.current = null
+    const symbol = selected
+    const interval = timeframe
+    const intervalMs = INTERVAL_MS[interval]
+    const queued = new Map<number, Candle>()
+    const duringLoad = new Map<number, Candle>()
+    let current: Candle[] = []
+    let loaded = false
+    let stopped = false
+    let opened = false
+    let request: AbortController | null = null
+    let lastRequestAt = 0
+    let flushTimer = 0
+    let reloadTimer = 0
 
-    const load = async () => {
+    const active = () => !stopped && selectedRef.current === symbol && timeframeRef.current === interval
+    const scheduleLoad = (delay = 0) => {
+      if (!active() || request || reloadTimer) return
+      // Coalesce reconnect, boundary and gap repair requests; failures retry at
+      // most every five seconds without restarting the websocket or other feeds.
+      const wait = Math.max(delay, 5000 - (Date.now() - lastRequestAt), 0)
+      reloadTimer = window.setTimeout(() => { reloadTimer = 0; void load() }, wait)
+    }
+    const publish = (next: Candle[]) => {
+      current = next
+      setCandles(next)
+    }
+    async function load() {
+      if (!active() || request) return
+      const ac = new AbortController()
+      request = ac
+      lastRequestAt = Date.now()
+      duringLoad.clear()
+      for (const candle of queued.values()) bufferCandle(duringLoad, candle)
+      let retry = false
       try {
-        const rows = await fetchKlines(selected, timeframe, ac.signal)
-        if (ignore) return
-        const pending = pendingKline.current
-        setCandles(pending && pending.time >= (rows.at(-1)?.time ?? 0) ? mergeCandle(rows, pending) : rows)
+        let rows = await fetchKlines(symbol, interval, ac.signal)
+        if (!active()) return
+        // Retain every timestamp received during the REST request, including a
+        // final old bar followed immediately by the first tick of the next one.
+        for (const candle of [...duringLoad.values()].sort((a, b) => a.time - b.time)) rows = mergeCandle(rows, candle)
+        queued.clear()
+        window.clearTimeout(flushTimer)
+        flushTimer = 0
+        publish(rows)
+        loaded = true
         setReadyKey(key)
         setErrorKey('')
       } catch (error) {
-        if (ignore || (error instanceof DOMException && error.name === 'AbortError')) return
+        if (!active() || (error instanceof DOMException && error.name === 'AbortError')) return
         const invalid = error instanceof ApiError && error.status === 400
-        setErrorKey(key)
-        setErrorText(invalid ? '这个交易对没有现货 K 线。' : 'K 线暂时没有取到，正在重试。')
-        if (!invalid) retryTimer = window.setTimeout(() => setNonce((value) => value + 1), 5000)
+        if (!loaded) {
+          setErrorKey(key)
+          setErrorText(invalid ? '这个交易对没有现货 K 线。' : 'K 线暂时没有取到，正在重试。')
+        }
+        retry = !invalid
+      } finally {
+        if (request === ac) request = null
+        duringLoad.clear()
+        if (retry) scheduleLoad(5000)
       }
     }
-    void load()
-    return () => {
-      ignore = true
-      ac.abort()
-      window.clearTimeout(retryTimer)
+    const flush = () => {
+      flushTimer = 0
+      if (!active() || !loaded) return
+      let next = current
+      for (const candle of [...queued.values()].sort((a, b) => a.time - b.time)) next = mergeCandle(next, candle)
+      queued.clear()
+      publish(next)
+      if (candlesNeedBackfill(next, intervalMs, Date.now())) scheduleLoad()
     }
-  }, [selected, timeframe, nonce])
-
-  useEffect(() => {
-    const symbol = selected
-    const interval = timeframe
-    let queued: Candle | null = null
-    let timer = 0
     const queue = (candle: Candle) => {
-      if (selectedRef.current !== symbol || timeframeRef.current !== interval) return
-      queued = candle
-      pendingKline.current = candle
-      if (timer) return
-      timer = window.setTimeout(() => {
-        timer = 0
-        const next = queued
-        queued = null
-        if (pendingKline.current === next) pendingKline.current = null
-        if (!next || selectedRef.current !== symbol || timeframeRef.current !== interval) return
-        if (readyKeyRef.current !== `${symbol}|${interval}`) return
-        setCandles((prev) => (prev.length ? mergeCandle(prev, next) : prev))
-      }, 250)
+      if (!active()) return
+      bufferCandle(queued, candle)
+      if (request) bufferCandle(duringLoad, candle)
+      if (!flushTimer) flushTimer = window.setTimeout(flush, 250)
     }
+    void load()
     const close = openStream(`/ws/${symbol.toLowerCase()}@kline_${interval}`, (raw) => {
       const event = raw as KlineEvent
       const kline = event.k
@@ -241,13 +271,31 @@ export function useMarket() {
         low: Number(kline.l),
         close: Number(kline.c),
         volume: Number(kline.v),
+        quoteVolume: Number(kline.q),
+        trades: Number(kline.n),
+        takerBuyVolume: Number(kline.V),
+        takerBuyQuoteVolume: Number(kline.Q),
+        isClosed: kline.x === true,
       })
-    }, () => undefined)
+    }, (isOpen) => {
+      if (!isOpen || !active()) return
+      if (opened || loaded) scheduleLoad()
+      opened = true
+    })
+    const repairTimer = window.setInterval(() => {
+      if (active() && loaded && candlesNeedBackfill(current, intervalMs, Date.now())) scheduleLoad()
+    }, 5000)
     return () => {
-      window.clearTimeout(timer)
+      stopped = true
+      request?.abort()
+      window.clearTimeout(flushTimer)
+      window.clearTimeout(reloadTimer)
+      window.clearInterval(repairTimer)
+      queued.clear()
+      duringLoad.clear()
       close()
     }
-  }, [selected, timeframe])
+  }, [selected, timeframe, nonce, requestKey])
 
   useEffect(() => {
     const symbol = selected

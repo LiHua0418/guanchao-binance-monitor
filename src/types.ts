@@ -82,6 +82,11 @@ export type Candle = {
   low: number
   close: number
   volume: number
+  quoteVolume?: number
+  trades?: number
+  takerBuyVolume?: number
+  takerBuyQuoteVolume?: number
+  isClosed?: boolean
 }
 
 export type Quote = {

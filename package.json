@@ -1,14 +1,18 @@
 {
   "name": "guanchao",
-  "description": "观潮：本地币安现货观察台。只读公开行情，含 K 线、技术面和已训练的 LSTM 推断。",
+  "description": "观潮：本地币安现货观察台，含 B3 多步预测与独立历史回放。",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/local.mjs dev",
+    "dev:web": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "test": "node --import tsx --test tests/*.test.ts",
+    "train:b3": "python scripts/train-b3.py",
+    "model:serve": "node scripts/local.mjs model",
+    "preview": "node scripts/local.mjs preview"
   },
   "dependencies": {
     "@fontsource/fraunces": "^5.3.0",
@@ -25,6 +29,7 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
+    "tsx": "^4.23.15",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }

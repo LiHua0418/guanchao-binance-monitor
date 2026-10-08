@@ -1,0 +1,311 @@
+{
+  "startedAt": "2026-10-08T12:33:53.669484+00:00",
+  "interval": "1h",
+  "seed": 20261008,
+  "catboostVersion": "1.2.10",
+  "features": [
+    "logReturn1",
+    "logReturn2",
+    "logReturn3",
+    "logReturn6",
+    "logReturn12",
+    "logReturn24",
+    "logReturn48",
+    "volatility12",
+    "volatility24",
+    "volatility48",
+    "rangeRatio",
+    "bodyRatio",
+    "upperWickRatio",
+    "lowerWickRatio",
+    "closeWithinCandle",
+    "sma5Distance",
+    "sma10Distance",
+    "sma20Distance",
+    "sma50Distance",
+    "sma100Distance",
+    "baseVolumeRelative20",
+    "baseVolumeRelative50",
+    "baseVolumeLogChange",
+    "quoteVolumeRelative20",
+    "quoteVolumeRelative50",
+    "quoteVolumeLogChange",
+    "takerImbalanceLag0",
+    "takerImbalanceLag1",
+    "takerImbalanceLag2",
+    "takerImbalanceLag3",
+    "takerImbalanceMean3",
+    "takerImbalanceMean6",
+    "takerImbalanceMean12",
+    "tradeCountLogChange",
+    "tradeCountRelative20",
+    "tradeCountRelative50",
+    "averageTradeLogChange",
+    "utcTimeSin",
+    "utcTimeCos",
+    "utcWeekSin",
+    "utcWeekCos",
+    "volNormalizedReturn1",
+    "volNormalizedReturn2",
+    "volNormalizedReturn3",
+    "volNormalizedReturn6",
+    "volNormalizedReturn12",
+    "volNormalizedReturn24",
+    "volNormalizedReturn48",
+    "rsi14Centered",
+    "logPriceZScore20",
+    "logPriceZScore50",
+    "meanRange12",
+    "meanRange24",
+    "volatilityRatio12to48",
+    "logVolatility48",
+    "vwapDistance",
+    "bodyTakerInteraction",
+    "symbol_BTCUSDT",
+    "symbol_ETHUSDT",
+    "symbol_BNBUSDT",
+    "symbol_SOLUSDT"
+  ],
+  "featureSource": "b4_data.py causal raw features plus four fixed symbol one-hot features",
+  "featureTransforms": "No fitted feature scaling for trees; only train-fitted CatBoost thresholds. Causal origin vol normalizes targets.",
+  "target": "Direct cumulative log return at every h1..h12, scaled by causal48barVol*sqrt(h); training target clipped to +/-8, evaluation never clipped; exact-zero returns excluded from classification training/metrics",
+  "configurations": [
+    {
+      "name": "depth4-l2-30",
+      "depth": 4,
+      "l2_leaf_reg": 30
+    },
+    {
+      "name": "depth6-l2-60",
+      "depth": 6,
+      "l2_leaf_reg": 60
+    }
+  ],
+  "maxIterations": 600,
+  "earlyStoppingRounds": 60,
+  "heads": [
+    "normalized-return RMSE",
+    "positive-return Logloss"
+  ],
+  "cpuThreads": 6,
+  "walkForwardFolds": [
+    {
+      "training": [
+        "train"
+      ],
+      "earlyStopping": "tune",
+      "validation": "val1"
+    },
+    {
+      "training": [
+        "train",
+        "tune"
+      ],
+      "earlyStopping": "val1",
+      "validation": "val2"
+    },
+    {
+      "training": [
+        "train",
+        "tune",
+        "val1"
+      ],
+      "earlyStopping": "val2",
+      "validation": "val3"
+    }
+  ],
+  "selection": "Only h1 determines depth/l2 and median early-stopped iterations; score=.6 Brier/trainPriorBrier+.4 returnMSE/zeroMSE averaged over3 expanding folds.",
+  "finalFit": "Freeze winning configuration and median CV tree counts; refit train+tune+val1+val2+val3. No early stopping on calibration/test.",
+  "calibration": "Separate 85-90% partition; Platt logistic mapping of direction logits (C=1), no test feedback; signed normalized residual quantiles",
+  "remainingHorizons": "Use exactly selected h1 configuration and fixed per-head tree count for h2..h12 return heads and h3,h6,h12 direction heads; no horizon-dependent search or interpolation.",
+  "gate": "Return: mean CV R2>0, mean IC>.02,2/3 folds positive IC/R2; Direction: mean CV BA>.51,2/3 BA>.5, mean Brier better than train prior",
+  "holdoutStatus": "Expanded-history final partition may overlap previously inspected experiments; this is historical reevaluation, not untouched external evidence.",
+  "deployment": "Experimental artifacts only. No deployed weights or src modification.",
+  "dataMetadata": {
+    "interval": "1h",
+    "sources": {
+      "BNBUSDT": {
+        "bars": 30000,
+        "first": "2023-05-07T12:00:00Z",
+        "last": "2026-10-08T11:00:00Z",
+        "sha256": "bfe23bfd100701abe0bcb9b35525bb627b8f4cf35d9c63f5f343d722903d5825",
+        "path": ".cache\\training-expanded\\BNBUSDT-1h-30000-1791457200000.json",
+        "reusedBars": 30000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "BTCUSDT": {
+        "bars": 30000,
+        "first": "2023-05-07T12:00:00Z",
+        "last": "2026-10-08T11:00:00Z",
+        "sha256": "6d07ef28054613883d6f96e5db505d434ad60f675541f2c9c6044c2bcfd02339",
+        "path": ".cache\\training-expanded\\BTCUSDT-1h-30000-1791457200000.json",
+        "reusedBars": 30000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "SOLUSDT": {
+        "bars": 30000,
+        "first": "2023-05-07T12:00:00Z",
+        "last": "2026-10-08T11:00:00Z",
+        "sha256": "e90370529a586e1de498149b73134f8477ff76dd38497bc5379ca5cf712c2b2a",
+        "path": ".cache\\training-expanded\\SOLUSDT-1h-30000-1791457200000.json",
+        "reusedBars": 30000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      },
+      "ETHUSDT": {
+        "bars": 30000,
+        "first": "2023-05-07T12:00:00Z",
+        "last": "2026-10-08T11:00:00Z",
+        "sha256": "609a77d9bf156f8b30ac4d1a405dcbeff79a2569e41ac5b77c8e5e1663fab7c1",
+        "path": ".cache\\training-expanded\\ETHUSDT-1h-30000-1791457200000.json",
+        "reusedBars": 30000,
+        "networkRequests": 0,
+        "continuous": true,
+        "closed": true
+      }
+    },
+    "cutoff": 1791462707086,
+    "cutoffIso": "2026-10-08T12:31:47.086000Z",
+    "features": [
+      "logReturn1",
+      "logReturn2",
+      "logReturn3",
+      "logReturn6",
+      "logReturn12",
+      "logReturn24",
+      "logReturn48",
+      "volatility12",
+      "volatility24",
+      "volatility48",
+      "rangeRatio",
+      "bodyRatio",
+      "upperWickRatio",
+      "lowerWickRatio",
+      "closeWithinCandle",
+      "sma5Distance",
+      "sma10Distance",
+      "sma20Distance",
+      "sma50Distance",
+      "sma100Distance",
+      "baseVolumeRelative20",
+      "baseVolumeRelative50",
+      "baseVolumeLogChange",
+      "quoteVolumeRelative20",
+      "quoteVolumeRelative50",
+      "quoteVolumeLogChange",
+      "takerImbalanceLag0",
+      "takerImbalanceLag1",
+      "takerImbalanceLag2",
+      "takerImbalanceLag3",
+      "takerImbalanceMean3",
+      "takerImbalanceMean6",
+      "takerImbalanceMean12",
+      "tradeCountLogChange",
+      "tradeCountRelative20",
+      "tradeCountRelative50",
+      "averageTradeLogChange",
+      "utcTimeSin",
+      "utcTimeCos",
+      "utcWeekSin",
+      "utcWeekCos",
+      "volNormalizedReturn1",
+      "volNormalizedReturn2",
+      "volNormalizedReturn3",
+      "volNormalizedReturn6",
+      "volNormalizedReturn12",
+      "volNormalizedReturn24",
+      "volNormalizedReturn48",
+      "rsi14Centered",
+      "logPriceZScore20",
+      "logPriceZScore50",
+      "meanRange12",
+      "meanRange24",
+      "volatilityRatio12to48",
+      "logVolatility48",
+      "vwapDistance",
+      "bodyTakerInteraction"
+    ],
+    "featureCount": 57,
+    "boundaryMs": [
+      1748491200000,
+      1759233600000,
+      1764604800000,
+      1769976000000,
+      1775347200000,
+      1780718400000
+    ],
+    "boundaries": [
+      "2025-05-29T04:00:00Z",
+      "2025-09-30T12:00:00Z",
+      "2025-12-01T16:00:00Z",
+      "2026-02-01T20:00:00Z",
+      "2026-04-05T00:00:00Z",
+      "2026-06-06T04:00:00Z"
+    ],
+    "partitions": {
+      "train": {
+        "samples": 71560,
+        "firstOrigin": "2023-05-14T06:00:00Z",
+        "lastOrigin": "2025-05-28T15:00:00Z",
+        "lastTarget": "2025-05-29T03:00:00Z"
+      },
+      "tune": {
+        "samples": 11888,
+        "firstOrigin": "2025-05-29T04:00:00Z",
+        "lastOrigin": "2025-09-29T23:00:00Z",
+        "lastTarget": "2025-09-30T11:00:00Z"
+      },
+      "val1": {
+        "samples": 5920,
+        "firstOrigin": "2025-09-30T12:00:00Z",
+        "lastOrigin": "2025-12-01T03:00:00Z",
+        "lastTarget": "2025-12-01T15:00:00Z"
+      },
+      "val2": {
+        "samples": 5920,
+        "firstOrigin": "2025-12-01T16:00:00Z",
+        "lastOrigin": "2026-02-01T07:00:00Z",
+        "lastTarget": "2026-02-01T19:00:00Z"
+      },
+      "val3": {
+        "samples": 5920,
+        "firstOrigin": "2026-02-01T20:00:00Z",
+        "lastOrigin": "2026-04-04T11:00:00Z",
+        "lastTarget": "2026-04-04T23:00:00Z"
+      },
+      "calibration": {
+        "samples": 5920,
+        "firstOrigin": "2026-04-05T00:00:00Z",
+        "lastOrigin": "2026-06-05T15:00:00Z",
+        "lastTarget": "2026-06-06T03:00:00Z"
+      },
+      "test": {
+        "samples": 11888,
+        "firstOrigin": "2026-06-06T04:00:00Z",
+        "lastOrigin": "2026-10-07T23:00:00Z",
+        "lastTarget": "2026-10-08T11:00:00Z"
+      }
+    },
+    "commonStart": "2023-05-14T06:00:00Z",
+    "commonEndExclusive": "2026-10-08T12:00:00Z",
+    "purgeBars": 12,
+    "maxSequence": 64,
+    "featureWarmup": 99,
+    "normalization": "Mean/std fitted only on feature rows in train calendar partition; clip +/-12.",
+    "target": "Next 1..12 closed-bar cumulative log returns; y_norm=y/(causal sigma48*sqrt(horizon)).",
+    "directionLabels": "Consumer-selected flat threshold on y_norm; never selected on final partition.",
+    "validation": "tune selects checkpoints; val1/val2/val3 are successive walk-forward blocks; refit uses only earlier targets.",
+    "knownLimitation": "Recent history overlaps prior inspected experiments. The final partition is historical reevaluation, not an untouched future test.",
+    "checks": {
+      "closedCandles": true,
+      "continuousTime": true,
+      "prefixCausality": true,
+      "targetPurge": true
+    }
+  }
+}

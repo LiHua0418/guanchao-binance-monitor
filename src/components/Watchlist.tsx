@@ -34,6 +34,17 @@ export function Watchlist({
 }: Props) {
   const [draft, setDraft] = useState('')
   const [status, setStatus] = useState<'idle' | 'checking' | 'invalid' | 'network' | 'full'>('idle')
+  const items = symbols.map((symbol) => {
+    const quote = quotes[symbol]
+    const price = symbol === selected && hero != null ? hero : quote?.last
+    const last = price != null && Number.isFinite(price) && price > 0 ? price : null
+    const pct = quote && last != null && Number.isFinite(quote.open) && quote.open > 0
+      ? ((last - quote.open) / quote.open) * 100 : null
+    return { symbol, base: baseAsset(symbol), last, pct }
+  })
+  const available = items.filter((item) => item.pct != null)
+  const rising = available.filter((item) => item.pct! > 0).length
+  const falling = available.filter((item) => item.pct! < 0).length
 
   async function submit(event: FormEvent) {
     event.preventDefault()
@@ -57,6 +68,16 @@ export function Watchlist({
           </button>
         )}
       </div>
+      <div
+        className="watch-breadth"
+        aria-label={`当前自选内 24 小时上涨 ${rising} 个，下跌 ${falling} 个；${available.length} 个有行情，缺失行情不统计`}
+        title="仅统计当前自选中有有效行情的交易对，缺失行情不计入"
+      >
+        <span>自选内 · 24h</span>
+        <span className="up">↑ <b className="num">{rising}</b></span>
+        <span className="down">↓ <b className="num">{falling}</b></span>
+        <small className="num">{available.length}/{symbols.length} 有行情</small>
+      </div>
       <form className="search" onSubmit={submit}>
         <input
           value={draft}
@@ -74,23 +95,34 @@ export function Watchlist({
         </button>
       </form>
       {status !== 'idle' && status !== 'checking' && <p className="form-error">{ADD_MESSAGE[status]}</p>}
+      <div className="watch-columns" aria-hidden="true">
+        <span>币种</span>
+        <span>价格</span>
+        <span>24h</span>
+      </div>
       <div className="watch-list">
-        {symbols.map((symbol) => {
-          const quote = quotes[symbol]
-          const last = symbol === selected && hero != null ? hero : quote?.last
-          const pct = quote && last != null && quote.open ? ((last - quote.open) / quote.open) * 100 : null
+        {items.map(({ symbol, base, last, pct }) => {
           const tone = pct == null ? 'flat' : pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat'
           return (
             <div key={symbol} className={`row ${symbol === selected ? 'active' : ''}`}>
-              <button type="button" className="row-main" onClick={() => onSelect(symbol)}>
-                <span>
-                  <strong>{NAMES[baseAsset(symbol)] ?? baseAsset(symbol)}</strong>
-                  <em>{baseAsset(symbol)} / {quoteAsset(symbol)}</em>
+              <button
+                type="button"
+                className="row-main"
+                aria-pressed={symbol === selected}
+                aria-label={`查看 ${base} / ${quoteAsset(symbol)}${symbol === selected ? '，当前选中' : ''}`}
+                onClick={() => onSelect(symbol)}
+              >
+                <span className="asset-identity">
+                  <span className="asset-token" aria-hidden="true">{base.slice(0, 1)}</span>
+                  <span className="asset-meta" title={symbol}>
+                    <strong>{base}</strong>
+                    <em>{NAMES[base] && NAMES[base] !== base ? `${NAMES[base]} · ` : ''}{quoteAsset(symbol)}</em>
+                  </span>
                 </span>
-                <span className={`row-price ${tone}`}>
+                <span className="row-price">
                   <strong className="num">{last == null ? '—' : formatPrice(last, inferDigits(last))}</strong>
-                  <em className="num">{pct == null ? '—' : formatPct(pct)}</em>
                 </span>
+                <span className={`row-change num ${tone}`}>{pct == null ? '—' : formatPct(pct)}</span>
               </button>
               {symbols.length > 1 && (
                 <button type="button" className="row-remove" aria-label={`移除 ${symbol}`} onClick={() => onRemove(symbol)}>

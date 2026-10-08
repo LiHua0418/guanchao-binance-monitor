@@ -1,0 +1,38 @@
+[
+  {
+    "interval": "15m",
+    "samples": 15888,
+    "regressionHeads": 12,
+    "maximumReturnDifference": 1.0842021724855044e-19,
+    "modelHashVerification": true,
+    "inferenceShapeAndFinite": true,
+    "prefixAndFuturePerturbationCausalityChecks": 12
+  },
+  {
+    "interval": "1h",
+    "samples": 11888,
+    "regressionHeads": 12,
+    "maximumReturnDifference": 1.734723475976807e-18,
+    "modelHashVerification": true,
+    "inferenceShapeAndFinite": true,
+    "prefixAndFuturePerturbationCausalityChecks": 12
+  },
+  {
+    "interval": "4h",
+    "samples": 5288,
+    "regressionHeads": 12,
+    "maximumReturnDifference": 3.469446951953614e-18,
+    "modelHashVerification": true,
+    "inferenceShapeAndFinite": true,
+    "prefixAndFuturePerturbationCausalityChecks": 12
+  },
+  {
+    "interval": "1d",
+    "samples": 788,
+    "regressionHeads": 12,
+    "maximumReturnDifference": 6.938893903907228e-18,
+    "modelHashVerification": true,
+    "inferenceShapeAndFinite": true,
+    "prefixAndFuturePerturbationCausalityChecks": 12
+  }
+]

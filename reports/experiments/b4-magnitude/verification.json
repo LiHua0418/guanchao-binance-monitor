@@ -1,0 +1,46 @@
+[
+  {
+    "interval": "15m",
+    "samples": 15888,
+    "directHeads": 12,
+    "maximumDifference": 0.0,
+    "cvPassed": true,
+    "heldoutSkill": true,
+    "hashesAndNonnegative": true,
+    "skillScope": "h1",
+    "causalPredictionChecks": 12
+  },
+  {
+    "interval": "1h",
+    "samples": 11888,
+    "directHeads": 12,
+    "maximumDifference": 0.0,
+    "cvPassed": true,
+    "heldoutSkill": true,
+    "hashesAndNonnegative": true,
+    "skillScope": "h1",
+    "causalPredictionChecks": 12
+  },
+  {
+    "interval": "4h",
+    "samples": 5288,
+    "directHeads": 12,
+    "maximumDifference": 0.0,
+    "cvPassed": true,
+    "heldoutSkill": true,
+    "hashesAndNonnegative": true,
+    "skillScope": "h1",
+    "causalPredictionChecks": 12
+  },
+  {
+    "interval": "1d",
+    "samples": 788,
+    "directHeads": 12,
+    "maximumDifference": 0.0,
+    "cvPassed": true,
+    "heldoutSkill": true,
+    "hashesAndNonnegative": true,
+    "skillScope": "h1",
+    "causalPredictionChecks": 12
+  }
+]

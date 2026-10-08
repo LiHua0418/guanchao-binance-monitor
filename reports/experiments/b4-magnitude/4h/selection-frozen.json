@@ -1,0 +1,1502 @@
+{
+  "frozenAt": "2026-10-08T12:42:47.095086+00:00",
+  "selected": {
+    "name": "depth4-l2-30",
+    "depth": 4,
+    "l2_leaf_reg": 30
+  },
+  "iterations": 580,
+  "eligible": true,
+  "candidates": [
+    {
+      "config": {
+        "name": "depth4-l2-30",
+        "depth": 4,
+        "l2_leaf_reg": 30
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "metrics": {
+            "samples": 2620,
+            "mse": 0.00012891569291351677,
+            "maePct": 0.7325723684682407,
+            "actualMeanPct": 1.0852338323772814,
+            "predictionMeanPct": 1.0994075233217628,
+            "ic": 0.41365333132615983,
+            "stdRatio": 0.4541481001937315,
+            "bySymbol": {
+              "BTCUSDT": {
+                "samples": 655,
+                "mse": 6.637764072264003e-05,
+                "maePct": 0.5346649404637097,
+                "actualMeanPct": 0.7913598674285325,
+                "predictionMeanPct": 0.7778389143822138,
+                "ic": 0.4279968985495108,
+                "stdRatio": 0.36124504607457986
+              },
+              "ETHUSDT": {
+                "samples": 655,
+                "mse": 0.00016327476526693742,
+                "maePct": 0.8167209141889367,
+                "actualMeanPct": 1.153216612812764,
+                "predictionMeanPct": 1.1930254325289131,
+                "ic": 0.33330699625712984,
+                "stdRatio": 0.4061596354318919
+              },
+              "BNBUSDT": {
+                "samples": 655,
+                "mse": 9.117450110749963e-05,
+                "maePct": 0.5993529022100992,
+                "actualMeanPct": 0.8725813278281751,
+                "predictionMeanPct": 0.8978592118087557,
+                "ic": 0.30282721719350875,
+                "stdRatio": 0.4013591511322131
+              },
+              "SOLUSDT": {
+                "samples": 655,
+                "mse": 0.00019483586455699002,
+                "maePct": 0.9795507170102176,
+                "actualMeanPct": 1.5237775214396554,
+                "predictionMeanPct": 1.5289065345671686,
+                "ic": 0.3706064421845162,
+                "stdRatio": 0.4088380241127846
+              }
+            }
+          },
+          "baselines": {
+            "trainMean": {
+              "samples": 2620,
+              "mse": 0.00015849057202602682,
+              "maePct": 0.8956534000066806,
+              "actualMeanPct": 1.0852338323772814,
+              "predictionMeanPct": 1.2667250285907452,
+              "ic": 0,
+              "stdRatio": 0.0,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 0.00010339766921684505,
+                  "maePct": 0.8452628690237265,
+                  "actualMeanPct": 0.7913598674285325,
+                  "predictionMeanPct": 1.2667250285907452,
+                  "ic": 0,
+                  "stdRatio": 0.0
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00018370146211297794,
+                  "maePct": 0.9153797202621703,
+                  "actualMeanPct": 1.153216612812764,
+                  "predictionMeanPct": 1.2667250285907452,
+                  "ic": 0,
+                  "stdRatio": 0.0
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 0.00011478349353076052,
+                  "maePct": 0.8115095005937998,
+                  "actualMeanPct": 0.8725813278281751,
+                  "predictionMeanPct": 1.2667250285907452,
+                  "ic": 0,
+                  "stdRatio": 0.0
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.0002320796632435238,
+                  "maePct": 1.010461510147026,
+                  "actualMeanPct": 1.5237775214396554,
+                  "predictionMeanPct": 1.2667250285907452,
+                  "ic": 0,
+                  "stdRatio": 0.0
+                }
+              }
+            },
+            "causalVolTrainScale": {
+              "samples": 2620,
+              "mse": 0.000148028738002979,
+              "maePct": 0.8065123926604992,
+              "actualMeanPct": 1.0852338323772814,
+              "predictionMeanPct": 1.1474051077288092,
+              "ic": 0.254367747692952,
+              "stdRatio": 0.38096273683167764,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 7.846533430577973e-05,
+                  "maePct": 0.6115946071765254,
+                  "actualMeanPct": 0.7913598674285325,
+                  "predictionMeanPct": 0.8520128812027186,
+                  "ic": 0.21357030845758213,
+                  "stdRatio": 0.3238398619682451
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00018597553935732782,
+                  "maePct": 0.8942371824434482,
+                  "actualMeanPct": 1.153216612812764,
+                  "predictionMeanPct": 1.257177048293471,
+                  "ic": 0.13977015677022875,
+                  "stdRatio": 0.32181581909813356
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 0.00010425456939383816,
+                  "maePct": 0.6634666926330852,
+                  "actualMeanPct": 0.8725813278281751,
+                  "predictionMeanPct": 0.9622639334909647,
+                  "ic": 0.11417070900184836,
+                  "stdRatio": 0.3494792650836428
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.0002234195089549703,
+                  "maePct": 1.0567510883889388,
+                  "actualMeanPct": 1.5237775214396554,
+                  "predictionMeanPct": 1.518166567928082,
+                  "ic": 0.17555438260537914,
+                  "stdRatio": 0.3228703935635877
+                }
+              }
+            },
+            "rollingAbsReturn20": {
+              "samples": 2620,
+              "mse": 0.000146147075791061,
+              "maePct": 0.7880327015988244,
+              "actualMeanPct": 1.0852338323772814,
+              "predictionMeanPct": 1.093274219919579,
+              "ic": 0.2830316390681082,
+              "stdRatio": 0.4305266619893124,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 7.951685306567377e-05,
+                  "maePct": 0.6051955231852878,
+                  "actualMeanPct": 0.7913598674285325,
+                  "predictionMeanPct": 0.7929350793333227,
+                  "ic": 0.20363447667280452,
+                  "stdRatio": 0.36356485946634337
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00018391676672356857,
+                  "maePct": 0.872591613266027,
+                  "actualMeanPct": 1.153216612812764,
+                  "predictionMeanPct": 1.161531224377624,
+                  "ic": 0.1706331199326235,
+                  "stdRatio": 0.36382021972056544
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 0.00010218083128247252,
+                  "maePct": 0.629437420885895,
+                  "actualMeanPct": 0.8725813278281751,
+                  "predictionMeanPct": 0.8861950450427546,
+                  "ic": 0.15333227166572547,
+                  "stdRatio": 0.383264199309196
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00021897385209252915,
+                  "maePct": 1.0449062490580887,
+                  "actualMeanPct": 1.5237775214396554,
+                  "predictionMeanPct": 1.5324355309246152,
+                  "ic": 0.2280631774923213,
+                  "stdRatio": 0.38024428132270444
+                }
+              }
+            },
+            "rollingAbsReturn48": {
+              "samples": 2620,
+              "mse": 0.00014558186543336973,
+              "maePct": 0.7854276931666768,
+              "actualMeanPct": 1.0852338323772814,
+              "predictionMeanPct": 1.098371531560178,
+              "ic": 0.2651237598831127,
+              "stdRatio": 0.35582671376143293,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 7.825854209603186e-05,
+                  "maePct": 0.5940782810056052,
+                  "actualMeanPct": 0.7913598674285325,
+                  "predictionMeanPct": 0.7975205487237519,
+                  "ic": 0.19882085227561105,
+                  "stdRatio": 0.28839479442736804
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00018106643708350423,
+                  "maePct": 0.857991479473582,
+                  "actualMeanPct": 1.153216612812764,
+                  "predictionMeanPct": 1.1642999079732494,
+                  "ic": 0.14710281916206777,
+                  "stdRatio": 0.26622335205210723
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 0.00010022937234781966,
+                  "maePct": 0.6305557091569841,
+                  "actualMeanPct": 0.8725813278281751,
+                  "predictionMeanPct": 0.9005043855406174,
+                  "ic": 0.11822406789247342,
+                  "stdRatio": 0.2701241457494246
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00022277311020612323,
+                  "maePct": 1.059085303030536,
+                  "actualMeanPct": 1.5237775214396554,
+                  "predictionMeanPct": 1.531161284003094,
+                  "ic": 0.16768505967511563,
+                  "stdRatio": 0.2946648191837055
+                }
+              }
+            }
+          },
+          "iterations": 594,
+          "score": 0.8896020771998303,
+          "mseImprovement": 0.1291171251428057,
+          "maeImprovement": 0.09167872045753367
+        },
+        {
+          "fold": 2,
+          "metrics": {
+            "samples": 2620,
+            "mse": 7.744161950757143e-05,
+            "maePct": 0.5653026094156761,
+            "actualMeanPct": 0.8404771713736149,
+            "predictionMeanPct": 0.8511616075556127,
+            "ic": 0.43726201736483866,
+            "stdRatio": 0.4635417671455061,
+            "bySymbol": {
+              "BTCUSDT": {
+                "samples": 655,
+                "mse": 3.595410144388538e-05,
+                "maePct": 0.401522607224986,
+                "actualMeanPct": 0.5816426816445673,
+                "predictionMeanPct": 0.5987420351324911,
+                "ic": 0.36644911727722057,
+                "stdRatio": 0.3764064858990807
+              },
+              "ETHUSDT": {
+                "samples": 655,
+                "mse": 0.00012579757933924707,
+                "maePct": 0.7614290997787623,
+                "actualMeanPct": 1.0589223574544957,
+                "predictionMeanPct": 1.0816604760437192,
+                "ic": 0.3258363550932442,
+                "stdRatio": 0.3914970216600817
+              },
+              "BNBUSDT": {
+                "samples": 655,
+                "mse": 2.647607804821965e-05,
+                "maePct": 0.34861218918749987,
+                "actualMeanPct": 0.5347820908579174,
+                "predictionMeanPct": 0.5473187688372161,
+                "ic": 0.34073626256144596,
+                "stdRatio": 0.3905452091776011
+              },
+              "SOLUSDT": {
+                "samples": 655,
+                "mse": 0.00012153871919893363,
+                "maePct": 0.749646541471456,
+                "actualMeanPct": 1.1865615555374793,
+                "predictionMeanPct": 1.1769251502090243,
+                "ic": 0.35020852515443995,
+                "stdRatio": 0.3684007001524066
+              }
+            }
+          },
+          "baselines": {
+            "trainMean": {
+              "samples": 2620,
+              "mse": 0.00010961730920177366,
+              "maePct": 0.820205426167259,
+              "actualMeanPct": 0.8404771713736149,
+              "predictionMeanPct": 1.2141687652352935,
+              "ic": 0,
+              "stdRatio": 1.7737053814371056e-16,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 8.150150228645893e-05,
+                  "maePct": 0.8026171915121603,
+                  "actualMeanPct": 0.5816426816445673,
+                  "predictionMeanPct": 1.2141687652352935,
+                  "ic": 0,
+                  "stdRatio": 2.6930539154063423e-16
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.0001424168230988187,
+                  "maePct": 0.870998409922946,
+                  "actualMeanPct": 1.0589223574544957,
+                  "predictionMeanPct": 1.2141687652352935,
+                  "ic": 0,
+                  "stdRatio": 1.4660739590315783e-16
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 7.600879851154807e-05,
+                  "maePct": 0.7954123592237459,
+                  "actualMeanPct": 0.5347820908579174,
+                  "predictionMeanPct": 1.2141687652352935,
+                  "ic": 0,
+                  "stdRatio": 3.1749893994746273e-16
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00013854211291026904,
+                  "maePct": 0.8117937440101839,
+                  "actualMeanPct": 1.1865615555374793,
+                  "predictionMeanPct": 1.2141687652352935,
+                  "ic": 0,
+                  "stdRatio": 1.4742082725826185e-16
+                }
+              }
+            },
+            "causalVolTrainScale": {
+              "samples": 2620,
+              "mse": 8.685916262770456e-05,
+              "maePct": 0.6109624653131671,
+              "actualMeanPct": 0.8404771713736149,
+              "predictionMeanPct": 0.8570352024082222,
+              "ic": 0.32113376047749087,
+              "stdRatio": 0.4255736128450275,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 4.1410428872887465e-05,
+                  "maePct": 0.4372311840083918,
+                  "actualMeanPct": 0.5816426816445673,
+                  "predictionMeanPct": 0.6081548342672656,
+                  "ic": 0.17787737131609443,
+                  "stdRatio": 0.3451092242346831
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00014252774864768964,
+                  "maePct": 0.8324373722899976,
+                  "actualMeanPct": 1.0589223574544957,
+                  "predictionMeanPct": 1.1080441467261666,
+                  "ic": 0.12184173617655969,
+                  "stdRatio": 0.29827512530050154
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 3.017955897414161e-05,
+                  "maePct": 0.3782472193216035,
+                  "actualMeanPct": 0.5347820908579174,
+                  "predictionMeanPct": 0.5356141873778696,
+                  "ic": 0.1564414007398488,
+                  "stdRatio": 0.34469254250943515
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00013331891401609954,
+                  "maePct": 0.7959340856326759,
+                  "actualMeanPct": 1.1865615555374793,
+                  "predictionMeanPct": 1.1763276412615873,
+                  "ic": 0.22234063773872131,
+                  "stdRatio": 0.3327409798348918
+                }
+              }
+            },
+            "rollingAbsReturn20": {
+              "samples": 2620,
+              "mse": 8.55984576658916e-05,
+              "maePct": 0.5985100446351022,
+              "actualMeanPct": 0.8404771713736149,
+              "predictionMeanPct": 0.8369382918023199,
+              "ic": 0.347104883804367,
+              "stdRatio": 0.47102466255795755,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 4.0580181109155e-05,
+                  "maePct": 0.4285234583747211,
+                  "actualMeanPct": 0.5816426816445673,
+                  "predictionMeanPct": 0.5829600668121272,
+                  "ic": 0.21967141606901788,
+                  "stdRatio": 0.38172682891264226
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.0001389381833730109,
+                  "maePct": 0.8049432952125148,
+                  "actualMeanPct": 1.0589223574544957,
+                  "predictionMeanPct": 1.0498104277173526,
+                  "ic": 0.20284741019931324,
+                  "stdRatio": 0.3857572958950694
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 2.8815783389455537e-05,
+                  "maePct": 0.36548401866514113,
+                  "actualMeanPct": 0.5347820908579174,
+                  "predictionMeanPct": 0.5315191453351206,
+                  "ic": 0.24066419098781283,
+                  "stdRatio": 0.3928686235272234
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00013405968279194493,
+                  "maePct": 0.7950894062880317,
+                  "actualMeanPct": 1.1865615555374793,
+                  "predictionMeanPct": 1.1834635273446792,
+                  "ic": 0.2358833649606984,
+                  "stdRatio": 0.3901959474866268
+                }
+              }
+            },
+            "rollingAbsReturn48": {
+              "samples": 2620,
+              "mse": 8.646554025848071e-05,
+              "maePct": 0.6021947407309182,
+              "actualMeanPct": 0.8404771713736149,
+              "predictionMeanPct": 0.835667409328033,
+              "ic": 0.3214329562674566,
+              "stdRatio": 0.40656381001089553,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 4.0736133918034916e-05,
+                  "maePct": 0.4257949106083271,
+                  "actualMeanPct": 0.5816426816445673,
+                  "predictionMeanPct": 0.5835105736121422,
+                  "ic": 0.1791543913614756,
+                  "stdRatio": 0.2968704347788548
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.0001414710774405738,
+                  "maePct": 0.8094679472760281,
+                  "actualMeanPct": 1.0589223574544957,
+                  "predictionMeanPct": 1.0427270014948062,
+                  "ic": 0.12119399251111487,
+                  "stdRatio": 0.2791817685454182
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 2.9686387948596435e-05,
+                  "maePct": 0.37401814765894187,
+                  "actualMeanPct": 0.5347820908579174,
+                  "predictionMeanPct": 0.5339202418823847,
+                  "ic": 0.16145436791407622,
+                  "stdRatio": 0.3046726801095693
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00013396856172671773,
+                  "maePct": 0.7994979573803758,
+                  "actualMeanPct": 1.1865615555374793,
+                  "predictionMeanPct": 1.1825118203227984,
+                  "ic": 0.21054932753063071,
+                  "stdRatio": 0.3193585270513034
+                }
+              }
+            }
+          },
+          "iterations": 481,
+          "score": 0.9084212771218403,
+          "mseImprovement": 0.10842313965768435,
+          "maeImprovement": 0.07473430609863518
+        },
+        {
+          "fold": 3,
+          "metrics": {
+            "samples": 2616,
+            "mse": 8.303101915147526e-05,
+            "maePct": 0.6046519967276741,
+            "actualMeanPct": 0.8792097619019353,
+            "predictionMeanPct": 0.9061816588314002,
+            "ic": 0.35947651801074143,
+            "stdRatio": 0.4540350694816938,
+            "bySymbol": {
+              "BTCUSDT": {
+                "samples": 654,
+                "mse": 2.7799114805803034e-05,
+                "maePct": 0.3703241581310971,
+                "actualMeanPct": 0.5109255388086431,
+                "predictionMeanPct": 0.548537888062963,
+                "ic": 0.2694874365579335,
+                "stdRatio": 0.3776613166464148
+              },
+              "ETHUSDT": {
+                "samples": 654,
+                "mse": 8.966262769421701e-05,
+                "maePct": 0.6515787457418515,
+                "actualMeanPct": 0.9408368703260777,
+                "predictionMeanPct": 0.9673806960501429,
+                "ic": 0.27404066408991923,
+                "stdRatio": 0.35861036859205386
+              },
+              "BNBUSDT": {
+                "samples": 654,
+                "mse": 9.441707812319627e-05,
+                "maePct": 0.6114195000983319,
+                "actualMeanPct": 0.9007272545800218,
+                "predictionMeanPct": 0.904721543687119,
+                "ic": 0.3514808818144103,
+                "stdRatio": 0.4507397819211403
+              },
+              "SOLUSDT": {
+                "samples": 654,
+                "mse": 0.0001202452559826847,
+                "maePct": 0.7852855829394159,
+                "actualMeanPct": 1.164349383892999,
+                "predictionMeanPct": 1.2040865075253755,
+                "ic": 0.219882193437591,
+                "stdRatio": 0.3773794877038046
+              }
+            }
+          },
+          "baselines": {
+            "trainMean": {
+              "samples": 2616,
+              "mse": 0.0001049601179771805,
+              "maePct": 0.7984538317952588,
+              "actualMeanPct": 0.8792097619019353,
+              "predictionMeanPct": 1.2056930144301954,
+              "ic": 0,
+              "stdRatio": 0.0,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 654,
+                  "mse": 7.772209659388626e-05,
+                  "maePct": 0.8114402747163947,
+                  "actualMeanPct": 0.5109255388086431,
+                  "predictionMeanPct": 1.2056930144301954,
+                  "ic": 0,
+                  "stdRatio": 3.1964911634318985e-16
+                },
+                "ETHUSDT": {
+                  "samples": 654,
+                  "mse": 0.00010313827218802491,
+                  "maePct": 0.7811704264441663,
+                  "actualMeanPct": 0.9408368703260777,
+                  "predictionMeanPct": 1.2056930144301954,
+                  "ic": 0,
+                  "stdRatio": 1.7693579686564218e-16
+                },
+                "BNBUSDT": {
+                  "samples": 654,
+                  "mse": 0.0001158264664902984,
+                  "maePct": 0.8015403634735232,
+                  "actualMeanPct": 0.9007272545800218,
+                  "predictionMeanPct": 1.2056930144301954,
+                  "ic": 0,
+                  "stdRatio": 1.6807469575447286e-16
+                },
+                "SOLUSDT": {
+                  "samples": 654,
+                  "mse": 0.0001231536366365124,
+                  "maePct": 0.7996642625469504,
+                  "actualMeanPct": 1.164349383892999,
+                  "predictionMeanPct": 1.2056930144301954,
+                  "ic": 0,
+                  "stdRatio": 1.5642574485416268e-16
+                }
+              }
+            },
+            "causalVolTrainScale": {
+              "samples": 2616,
+              "mse": 8.765995978186357e-05,
+              "maePct": 0.6283952454169613,
+              "actualMeanPct": 0.8792097619019353,
+              "predictionMeanPct": 0.8743408450526294,
+              "ic": 0.2836923095293838,
+              "stdRatio": 0.3838544885866074,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 654,
+                  "mse": 2.939581001728719e-05,
+                  "maePct": 0.3820165520899423,
+                  "actualMeanPct": 0.5109255388086431,
+                  "predictionMeanPct": 0.5237413492604458,
+                  "ic": 0.12955489243804247,
+                  "stdRatio": 0.2492291527081327
+                },
+                "ETHUSDT": {
+                  "samples": 654,
+                  "mse": 9.631841926122676e-05,
+                  "maePct": 0.6829225589816039,
+                  "actualMeanPct": 0.9408368703260777,
+                  "predictionMeanPct": 0.9510677890621316,
+                  "ic": 0.12273696541099864,
+                  "stdRatio": 0.2530610609853154
+                },
+                "BNBUSDT": {
+                  "samples": 654,
+                  "mse": 0.00010039195588891165,
+                  "maePct": 0.6535941903383086,
+                  "actualMeanPct": 0.9007272545800218,
+                  "predictionMeanPct": 0.8875541895115588,
+                  "ic": 0.2823128071320343,
+                  "stdRatio": 0.4304834348679959
+                },
+                "SOLUSDT": {
+                  "samples": 654,
+                  "mse": 0.00012453365396002865,
+                  "maePct": 0.7950476802579906,
+                  "actualMeanPct": 1.164349383892999,
+                  "predictionMeanPct": 1.1350000523763817,
+                  "ic": 0.1056756006332146,
+                  "stdRatio": 0.2575901158788805
+                }
+              }
+            },
+            "rollingAbsReturn20": {
+              "samples": 2616,
+              "mse": 8.775735757621794e-05,
+              "maePct": 0.6271412722746175,
+              "actualMeanPct": 0.8792097619019353,
+              "predictionMeanPct": 0.8716869555055576,
+              "ic": 0.2894736792459171,
+              "stdRatio": 0.40924058825019843,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 654,
+                  "mse": 3.066732263546505e-05,
+                  "maePct": 0.385580973687896,
+                  "actualMeanPct": 0.5109255388086431,
+                  "predictionMeanPct": 0.5080095809152413,
+                  "ic": 0.08650999922872335,
+                  "stdRatio": 0.3072422762093499
+                },
+                "ETHUSDT": {
+                  "samples": 654,
+                  "mse": 9.731450157849796e-05,
+                  "maePct": 0.6838053007424746,
+                  "actualMeanPct": 0.9408368703260777,
+                  "predictionMeanPct": 0.9314450666747007,
+                  "ic": 0.1231799404492687,
+                  "stdRatio": 0.2889296692654948
+                },
+                "BNBUSDT": {
+                  "samples": 654,
+                  "mse": 9.711035060367277e-05,
+                  "maePct": 0.634876604401409,
+                  "actualMeanPct": 0.9007272545800218,
+                  "predictionMeanPct": 0.8902194116916793,
+                  "ic": 0.3177046571288934,
+                  "stdRatio": 0.42925667502926756
+                },
+                "SOLUSDT": {
+                  "samples": 654,
+                  "mse": 0.00012593725548723595,
+                  "maePct": 0.8043022102666899,
+                  "actualMeanPct": 1.164349383892999,
+                  "predictionMeanPct": 1.1570737627406096,
+                  "ic": 0.10925260478042485,
+                  "stdRatio": 0.29877090428298547
+                }
+              }
+            },
+            "rollingAbsReturn48": {
+              "samples": 2616,
+              "mse": 8.655960538733503e-05,
+              "maePct": 0.620770959891806,
+              "actualMeanPct": 0.8792097619019353,
+              "predictionMeanPct": 0.8638104996700922,
+              "ic": 0.29453945502140405,
+              "stdRatio": 0.36094548920318664,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 654,
+                  "mse": 2.8931694501500744e-05,
+                  "maePct": 0.3729411230920032,
+                  "actualMeanPct": 0.5109255388086431,
+                  "predictionMeanPct": 0.5016840114300951,
+                  "ic": 0.1547183908331983,
+                  "stdRatio": 0.23207800256087713
+                },
+                "ETHUSDT": {
+                  "samples": 654,
+                  "mse": 9.508126636485451e-05,
+                  "maePct": 0.6717858791899636,
+                  "actualMeanPct": 0.9408368703260777,
+                  "predictionMeanPct": 0.927576271671836,
+                  "ic": 0.13559092930663239,
+                  "stdRatio": 0.22138369738897234
+                },
+                "BNBUSDT": {
+                  "samples": 654,
+                  "mse": 9.846617511516368e-05,
+                  "maePct": 0.6440412561363151,
+                  "actualMeanPct": 0.9007272545800218,
+                  "predictionMeanPct": 0.8770765985906216,
+                  "ic": 0.28943382293952546,
+                  "stdRatio": 0.3765299683695612
+                },
+                "SOLUSDT": {
+                  "samples": 654,
+                  "mse": 0.00012375928556782116,
+                  "maePct": 0.794315581148942,
+                  "actualMeanPct": 1.164349383892999,
+                  "predictionMeanPct": 1.1489051169878162,
+                  "ic": 0.09737880345462763,
+                  "stdRatio": 0.2222916339497767
+                }
+              }
+            }
+          },
+          "iterations": 580,
+          "score": 0.9547052076435348,
+          "mseImprovement": 0.05280564401246757,
+          "maeImprovement": 0.03778394070046276
+        }
+      ],
+      "score": 0.9175761873217351,
+      "mseImprovement": 0.09678196960431922,
+      "maeImprovement": 0.06806565575221053,
+      "eligible": true
+    },
+    {
+      "config": {
+        "name": "depth6-l2-60",
+        "depth": 6,
+        "l2_leaf_reg": 60
+      },
+      "folds": [
+        {
+          "fold": 1,
+          "metrics": {
+            "samples": 2620,
+            "mse": 0.00012921254536312277,
+            "maePct": 0.7334603155907753,
+            "actualMeanPct": 1.0852338323772814,
+            "predictionMeanPct": 1.0975964387278347,
+            "ic": 0.41144000189701646,
+            "stdRatio": 0.45336064047291297,
+            "bySymbol": {
+              "BTCUSDT": {
+                "samples": 655,
+                "mse": 6.62110067719126e-05,
+                "maePct": 0.537293420210237,
+                "actualMeanPct": 0.7913598674285325,
+                "predictionMeanPct": 0.7797294874087689,
+                "ic": 0.42947281901654255,
+                "stdRatio": 0.36849801575528
+              },
+              "ETHUSDT": {
+                "samples": 655,
+                "mse": 0.0001637612426476477,
+                "maePct": 0.8140490420862736,
+                "actualMeanPct": 1.153216612812764,
+                "predictionMeanPct": 1.185099697483098,
+                "ic": 0.32951356513592284,
+                "stdRatio": 0.40548421719359046
+              },
+              "BNBUSDT": {
+                "samples": 655,
+                "mse": 9.119900199680584e-05,
+                "maePct": 0.6028299605886824,
+                "actualMeanPct": 0.8725813278281751,
+                "predictionMeanPct": 0.9021686700793218,
+                "ic": 0.3029037981121706,
+                "stdRatio": 0.4017145455785819
+              },
+              "SOLUSDT": {
+                "samples": 655,
+                "mse": 0.00019567893003612498,
+                "maePct": 0.9796688394779083,
+                "actualMeanPct": 1.5237775214396554,
+                "predictionMeanPct": 1.5233878999401504,
+                "ic": 0.36608098463187666,
+                "stdRatio": 0.4094228702702605
+              }
+            }
+          },
+          "baselines": {
+            "trainMean": {
+              "samples": 2620,
+              "mse": 0.00015849057202602682,
+              "maePct": 0.8956534000066806,
+              "actualMeanPct": 1.0852338323772814,
+              "predictionMeanPct": 1.2667250285907452,
+              "ic": 0,
+              "stdRatio": 0.0,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 0.00010339766921684505,
+                  "maePct": 0.8452628690237265,
+                  "actualMeanPct": 0.7913598674285325,
+                  "predictionMeanPct": 1.2667250285907452,
+                  "ic": 0,
+                  "stdRatio": 0.0
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00018370146211297794,
+                  "maePct": 0.9153797202621703,
+                  "actualMeanPct": 1.153216612812764,
+                  "predictionMeanPct": 1.2667250285907452,
+                  "ic": 0,
+                  "stdRatio": 0.0
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 0.00011478349353076052,
+                  "maePct": 0.8115095005937998,
+                  "actualMeanPct": 0.8725813278281751,
+                  "predictionMeanPct": 1.2667250285907452,
+                  "ic": 0,
+                  "stdRatio": 0.0
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.0002320796632435238,
+                  "maePct": 1.010461510147026,
+                  "actualMeanPct": 1.5237775214396554,
+                  "predictionMeanPct": 1.2667250285907452,
+                  "ic": 0,
+                  "stdRatio": 0.0
+                }
+              }
+            },
+            "causalVolTrainScale": {
+              "samples": 2620,
+              "mse": 0.000148028738002979,
+              "maePct": 0.8065123926604992,
+              "actualMeanPct": 1.0852338323772814,
+              "predictionMeanPct": 1.1474051077288092,
+              "ic": 0.254367747692952,
+              "stdRatio": 0.38096273683167764,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 7.846533430577973e-05,
+                  "maePct": 0.6115946071765254,
+                  "actualMeanPct": 0.7913598674285325,
+                  "predictionMeanPct": 0.8520128812027186,
+                  "ic": 0.21357030845758213,
+                  "stdRatio": 0.3238398619682451
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00018597553935732782,
+                  "maePct": 0.8942371824434482,
+                  "actualMeanPct": 1.153216612812764,
+                  "predictionMeanPct": 1.257177048293471,
+                  "ic": 0.13977015677022875,
+                  "stdRatio": 0.32181581909813356
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 0.00010425456939383816,
+                  "maePct": 0.6634666926330852,
+                  "actualMeanPct": 0.8725813278281751,
+                  "predictionMeanPct": 0.9622639334909647,
+                  "ic": 0.11417070900184836,
+                  "stdRatio": 0.3494792650836428
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.0002234195089549703,
+                  "maePct": 1.0567510883889388,
+                  "actualMeanPct": 1.5237775214396554,
+                  "predictionMeanPct": 1.518166567928082,
+                  "ic": 0.17555438260537914,
+                  "stdRatio": 0.3228703935635877
+                }
+              }
+            },
+            "rollingAbsReturn20": {
+              "samples": 2620,
+              "mse": 0.000146147075791061,
+              "maePct": 0.7880327015988244,
+              "actualMeanPct": 1.0852338323772814,
+              "predictionMeanPct": 1.093274219919579,
+              "ic": 0.2830316390681082,
+              "stdRatio": 0.4305266619893124,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 7.951685306567377e-05,
+                  "maePct": 0.6051955231852878,
+                  "actualMeanPct": 0.7913598674285325,
+                  "predictionMeanPct": 0.7929350793333227,
+                  "ic": 0.20363447667280452,
+                  "stdRatio": 0.36356485946634337
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00018391676672356857,
+                  "maePct": 0.872591613266027,
+                  "actualMeanPct": 1.153216612812764,
+                  "predictionMeanPct": 1.161531224377624,
+                  "ic": 0.1706331199326235,
+                  "stdRatio": 0.36382021972056544
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 0.00010218083128247252,
+                  "maePct": 0.629437420885895,
+                  "actualMeanPct": 0.8725813278281751,
+                  "predictionMeanPct": 0.8861950450427546,
+                  "ic": 0.15333227166572547,
+                  "stdRatio": 0.383264199309196
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00021897385209252915,
+                  "maePct": 1.0449062490580887,
+                  "actualMeanPct": 1.5237775214396554,
+                  "predictionMeanPct": 1.5324355309246152,
+                  "ic": 0.2280631774923213,
+                  "stdRatio": 0.38024428132270444
+                }
+              }
+            },
+            "rollingAbsReturn48": {
+              "samples": 2620,
+              "mse": 0.00014558186543336973,
+              "maePct": 0.7854276931666768,
+              "actualMeanPct": 1.0852338323772814,
+              "predictionMeanPct": 1.098371531560178,
+              "ic": 0.2651237598831127,
+              "stdRatio": 0.35582671376143293,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 7.825854209603186e-05,
+                  "maePct": 0.5940782810056052,
+                  "actualMeanPct": 0.7913598674285325,
+                  "predictionMeanPct": 0.7975205487237519,
+                  "ic": 0.19882085227561105,
+                  "stdRatio": 0.28839479442736804
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00018106643708350423,
+                  "maePct": 0.857991479473582,
+                  "actualMeanPct": 1.153216612812764,
+                  "predictionMeanPct": 1.1642999079732494,
+                  "ic": 0.14710281916206777,
+                  "stdRatio": 0.26622335205210723
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 0.00010022937234781966,
+                  "maePct": 0.6305557091569841,
+                  "actualMeanPct": 0.8725813278281751,
+                  "predictionMeanPct": 0.9005043855406174,
+                  "ic": 0.11822406789247342,
+                  "stdRatio": 0.2701241457494246
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00022277311020612323,
+                  "maePct": 1.059085303030536,
+                  "actualMeanPct": 1.5237775214396554,
+                  "predictionMeanPct": 1.531161284003094,
+                  "ic": 0.16768505967511563,
+                  "stdRatio": 0.2946648191837055
+                }
+              }
+            }
+          },
+          "iterations": 567,
+          "score": 0.8911552481276206,
+          "mseImprovement": 0.12711175474236347,
+          "maeImprovement": 0.09057774900239524
+        },
+        {
+          "fold": 2,
+          "metrics": {
+            "samples": 2620,
+            "mse": 7.803885094106768e-05,
+            "maePct": 0.5673052512226445,
+            "actualMeanPct": 0.8404771713736149,
+            "predictionMeanPct": 0.8503497096525395,
+            "ic": 0.4301704396708532,
+            "stdRatio": 0.458460961819018,
+            "bySymbol": {
+              "BTCUSDT": {
+                "samples": 655,
+                "mse": 3.6497581404749357e-05,
+                "maePct": 0.404833646513514,
+                "actualMeanPct": 0.5816426816445673,
+                "predictionMeanPct": 0.6003922012562857,
+                "ic": 0.3498040950728145,
+                "stdRatio": 0.3834607789686005
+              },
+              "ETHUSDT": {
+                "samples": 655,
+                "mse": 0.00012572125611816828,
+                "maePct": 0.7609354086350711,
+                "actualMeanPct": 1.0589223574544957,
+                "predictionMeanPct": 1.0787132375539994,
+                "ic": 0.3252163056957847,
+                "stdRatio": 0.38397024156544085
+              },
+              "BNBUSDT": {
+                "samples": 655,
+                "mse": 2.668862104111484e-05,
+                "maePct": 0.3498999944854137,
+                "actualMeanPct": 0.5347820908579174,
+                "predictionMeanPct": 0.5481627259687257,
+                "ic": 0.331875655642666,
+                "stdRatio": 0.39160638377111384
+              },
+              "SOLUSDT": {
+                "samples": 655,
+                "mse": 0.00012324794520023822,
+                "maePct": 0.7535519552565796,
+                "actualMeanPct": 1.1865615555374793,
+                "predictionMeanPct": 1.1741306738311474,
+                "ic": 0.33285741377013667,
+                "stdRatio": 0.3607588106710824
+              }
+            }
+          },
+          "baselines": {
+            "trainMean": {
+              "samples": 2620,
+              "mse": 0.00010961730920177366,
+              "maePct": 0.820205426167259,
+              "actualMeanPct": 0.8404771713736149,
+              "predictionMeanPct": 1.2141687652352935,
+              "ic": 0,
+              "stdRatio": 1.7737053814371056e-16,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 8.150150228645893e-05,
+                  "maePct": 0.8026171915121603,
+                  "actualMeanPct": 0.5816426816445673,
+                  "predictionMeanPct": 1.2141687652352935,
+                  "ic": 0,
+                  "stdRatio": 2.6930539154063423e-16
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.0001424168230988187,
+                  "maePct": 0.870998409922946,
+                  "actualMeanPct": 1.0589223574544957,
+                  "predictionMeanPct": 1.2141687652352935,
+                  "ic": 0,
+                  "stdRatio": 1.4660739590315783e-16
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 7.600879851154807e-05,
+                  "maePct": 0.7954123592237459,
+                  "actualMeanPct": 0.5347820908579174,
+                  "predictionMeanPct": 1.2141687652352935,
+                  "ic": 0,
+                  "stdRatio": 3.1749893994746273e-16
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00013854211291026904,
+                  "maePct": 0.8117937440101839,
+                  "actualMeanPct": 1.1865615555374793,
+                  "predictionMeanPct": 1.2141687652352935,
+                  "ic": 0,
+                  "stdRatio": 1.4742082725826185e-16
+                }
+              }
+            },
+            "causalVolTrainScale": {
+              "samples": 2620,
+              "mse": 8.685916262770456e-05,
+              "maePct": 0.6109624653131671,
+              "actualMeanPct": 0.8404771713736149,
+              "predictionMeanPct": 0.8570352024082222,
+              "ic": 0.32113376047749087,
+              "stdRatio": 0.4255736128450275,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 4.1410428872887465e-05,
+                  "maePct": 0.4372311840083918,
+                  "actualMeanPct": 0.5816426816445673,
+                  "predictionMeanPct": 0.6081548342672656,
+                  "ic": 0.17787737131609443,
+                  "stdRatio": 0.3451092242346831
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.00014252774864768964,
+                  "maePct": 0.8324373722899976,
+                  "actualMeanPct": 1.0589223574544957,
+                  "predictionMeanPct": 1.1080441467261666,
+                  "ic": 0.12184173617655969,
+                  "stdRatio": 0.29827512530050154
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 3.017955897414161e-05,
+                  "maePct": 0.3782472193216035,
+                  "actualMeanPct": 0.5347820908579174,
+                  "predictionMeanPct": 0.5356141873778696,
+                  "ic": 0.1564414007398488,
+                  "stdRatio": 0.34469254250943515
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00013331891401609954,
+                  "maePct": 0.7959340856326759,
+                  "actualMeanPct": 1.1865615555374793,
+                  "predictionMeanPct": 1.1763276412615873,
+                  "ic": 0.22234063773872131,
+                  "stdRatio": 0.3327409798348918
+                }
+              }
+            },
+            "rollingAbsReturn20": {
+              "samples": 2620,
+              "mse": 8.55984576658916e-05,
+              "maePct": 0.5985100446351022,
+              "actualMeanPct": 0.8404771713736149,
+              "predictionMeanPct": 0.8369382918023199,
+              "ic": 0.347104883804367,
+              "stdRatio": 0.47102466255795755,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 4.0580181109155e-05,
+                  "maePct": 0.4285234583747211,
+                  "actualMeanPct": 0.5816426816445673,
+                  "predictionMeanPct": 0.5829600668121272,
+                  "ic": 0.21967141606901788,
+                  "stdRatio": 0.38172682891264226
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.0001389381833730109,
+                  "maePct": 0.8049432952125148,
+                  "actualMeanPct": 1.0589223574544957,
+                  "predictionMeanPct": 1.0498104277173526,
+                  "ic": 0.20284741019931324,
+                  "stdRatio": 0.3857572958950694
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 2.8815783389455537e-05,
+                  "maePct": 0.36548401866514113,
+                  "actualMeanPct": 0.5347820908579174,
+                  "predictionMeanPct": 0.5315191453351206,
+                  "ic": 0.24066419098781283,
+                  "stdRatio": 0.3928686235272234
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00013405968279194493,
+                  "maePct": 0.7950894062880317,
+                  "actualMeanPct": 1.1865615555374793,
+                  "predictionMeanPct": 1.1834635273446792,
+                  "ic": 0.2358833649606984,
+                  "stdRatio": 0.3901959474866268
+                }
+              }
+            },
+            "rollingAbsReturn48": {
+              "samples": 2620,
+              "mse": 8.646554025848071e-05,
+              "maePct": 0.6021947407309182,
+              "actualMeanPct": 0.8404771713736149,
+              "predictionMeanPct": 0.835667409328033,
+              "ic": 0.3214329562674566,
+              "stdRatio": 0.40656381001089553,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 655,
+                  "mse": 4.0736133918034916e-05,
+                  "maePct": 0.4257949106083271,
+                  "actualMeanPct": 0.5816426816445673,
+                  "predictionMeanPct": 0.5835105736121422,
+                  "ic": 0.1791543913614756,
+                  "stdRatio": 0.2968704347788548
+                },
+                "ETHUSDT": {
+                  "samples": 655,
+                  "mse": 0.0001414710774405738,
+                  "maePct": 0.8094679472760281,
+                  "actualMeanPct": 1.0589223574544957,
+                  "predictionMeanPct": 1.0427270014948062,
+                  "ic": 0.12119399251111487,
+                  "stdRatio": 0.2791817685454182
+                },
+                "BNBUSDT": {
+                  "samples": 655,
+                  "mse": 2.9686387948596435e-05,
+                  "maePct": 0.37401814765894187,
+                  "actualMeanPct": 0.5347820908579174,
+                  "predictionMeanPct": 0.5339202418823847,
+                  "ic": 0.16145436791407622,
+                  "stdRatio": 0.3046726801095693
+                },
+                "SOLUSDT": {
+                  "samples": 655,
+                  "mse": 0.00013396856172671773,
+                  "maePct": 0.7994979573803758,
+                  "actualMeanPct": 1.1865615555374793,
+                  "predictionMeanPct": 1.1825118203227984,
+                  "ic": 0.21054932753063071,
+                  "stdRatio": 0.3193585270513034
+                }
+              }
+            }
+          },
+          "iterations": 333,
+          "score": 0.9134981308374825,
+          "mseImprovement": 0.1015472797549577,
+          "maeImprovement": 0.07145645857007721
+        },
+        {
+          "fold": 3,
+          "metrics": {
+            "samples": 2616,
+            "mse": 8.295792511601422e-05,
+            "maePct": 0.6038017558066188,
+            "actualMeanPct": 0.8792097619019353,
+            "predictionMeanPct": 0.9060615507357447,
+            "ic": 0.3595478722290852,
+            "stdRatio": 0.45023616369560804,
+            "bySymbol": {
+              "BTCUSDT": {
+                "samples": 654,
+                "mse": 2.7795153645169193e-05,
+                "maePct": 0.36983200761432367,
+                "actualMeanPct": 0.5109255388086431,
+                "predictionMeanPct": 0.5499722771131588,
+                "ic": 0.2723763358881797,
+                "stdRatio": 0.38533266164094926
+              },
+              "ETHUSDT": {
+                "samples": 654,
+                "mse": 9.00922352474027e-05,
+                "maePct": 0.6518472039138822,
+                "actualMeanPct": 0.9408368703260777,
+                "predictionMeanPct": 0.9667127006477677,
+                "ic": 0.26677934371529205,
+                "stdRatio": 0.3547039126764508
+              },
+              "BNBUSDT": {
+                "samples": 654,
+                "mse": 9.491624702767456e-05,
+                "maePct": 0.6127301552692296,
+                "actualMeanPct": 0.9007272545800218,
+                "predictionMeanPct": 0.9110313248844343,
+                "ic": 0.3473672117984702,
+                "stdRatio": 0.4549715422507141
+              },
+              "SOLUSDT": {
+                "samples": 654,
+                "mse": 0.0001190280645438104,
+                "maePct": 0.7807976564290394,
+                "actualMeanPct": 1.164349383892999,
+                "predictionMeanPct": 1.1965299002976186,
+                "ic": 0.2280151557446111,
+                "stdRatio": 0.36582940480300263
+              }
+            }
+          },
+          "baselines": {
+            "trainMean": {
+              "samples": 2616,
+              "mse": 0.0001049601179771805,
+              "maePct": 0.7984538317952588,
+              "actualMeanPct": 0.8792097619019353,
+              "predictionMeanPct": 1.2056930144301954,
+              "ic": 0,
+              "stdRatio": 0.0,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 654,
+                  "mse": 7.772209659388626e-05,
+                  "maePct": 0.8114402747163947,
+                  "actualMeanPct": 0.5109255388086431,
+                  "predictionMeanPct": 1.2056930144301954,
+                  "ic": 0,
+                  "stdRatio": 3.1964911634318985e-16
+                },
+                "ETHUSDT": {
+                  "samples": 654,
+                  "mse": 0.00010313827218802491,
+                  "maePct": 0.7811704264441663,
+                  "actualMeanPct": 0.9408368703260777,
+                  "predictionMeanPct": 1.2056930144301954,
+                  "ic": 0,
+                  "stdRatio": 1.7693579686564218e-16
+                },
+                "BNBUSDT": {
+                  "samples": 654,
+                  "mse": 0.0001158264664902984,
+                  "maePct": 0.8015403634735232,
+                  "actualMeanPct": 0.9007272545800218,
+                  "predictionMeanPct": 1.2056930144301954,
+                  "ic": 0,
+                  "stdRatio": 1.6807469575447286e-16
+                },
+                "SOLUSDT": {
+                  "samples": 654,
+                  "mse": 0.0001231536366365124,
+                  "maePct": 0.7996642625469504,
+                  "actualMeanPct": 1.164349383892999,
+                  "predictionMeanPct": 1.2056930144301954,
+                  "ic": 0,
+                  "stdRatio": 1.5642574485416268e-16
+                }
+              }
+            },
+            "causalVolTrainScale": {
+              "samples": 2616,
+              "mse": 8.765995978186357e-05,
+              "maePct": 0.6283952454169613,
+              "actualMeanPct": 0.8792097619019353,
+              "predictionMeanPct": 0.8743408450526294,
+              "ic": 0.2836923095293838,
+              "stdRatio": 0.3838544885866074,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 654,
+                  "mse": 2.939581001728719e-05,
+                  "maePct": 0.3820165520899423,
+                  "actualMeanPct": 0.5109255388086431,
+                  "predictionMeanPct": 0.5237413492604458,
+                  "ic": 0.12955489243804247,
+                  "stdRatio": 0.2492291527081327
+                },
+                "ETHUSDT": {
+                  "samples": 654,
+                  "mse": 9.631841926122676e-05,
+                  "maePct": 0.6829225589816039,
+                  "actualMeanPct": 0.9408368703260777,
+                  "predictionMeanPct": 0.9510677890621316,
+                  "ic": 0.12273696541099864,
+                  "stdRatio": 0.2530610609853154
+                },
+                "BNBUSDT": {
+                  "samples": 654,
+                  "mse": 0.00010039195588891165,
+                  "maePct": 0.6535941903383086,
+                  "actualMeanPct": 0.9007272545800218,
+                  "predictionMeanPct": 0.8875541895115588,
+                  "ic": 0.2823128071320343,
+                  "stdRatio": 0.4304834348679959
+                },
+                "SOLUSDT": {
+                  "samples": 654,
+                  "mse": 0.00012453365396002865,
+                  "maePct": 0.7950476802579906,
+                  "actualMeanPct": 1.164349383892999,
+                  "predictionMeanPct": 1.1350000523763817,
+                  "ic": 0.1056756006332146,
+                  "stdRatio": 0.2575901158788805
+                }
+              }
+            },
+            "rollingAbsReturn20": {
+              "samples": 2616,
+              "mse": 8.775735757621794e-05,
+              "maePct": 0.6271412722746175,
+              "actualMeanPct": 0.8792097619019353,
+              "predictionMeanPct": 0.8716869555055576,
+              "ic": 0.2894736792459171,
+              "stdRatio": 0.40924058825019843,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 654,
+                  "mse": 3.066732263546505e-05,
+                  "maePct": 0.385580973687896,
+                  "actualMeanPct": 0.5109255388086431,
+                  "predictionMeanPct": 0.5080095809152413,
+                  "ic": 0.08650999922872335,
+                  "stdRatio": 0.3072422762093499
+                },
+                "ETHUSDT": {
+                  "samples": 654,
+                  "mse": 9.731450157849796e-05,
+                  "maePct": 0.6838053007424746,
+                  "actualMeanPct": 0.9408368703260777,
+                  "predictionMeanPct": 0.9314450666747007,
+                  "ic": 0.1231799404492687,
+                  "stdRatio": 0.2889296692654948
+                },
+                "BNBUSDT": {
+                  "samples": 654,
+                  "mse": 9.711035060367277e-05,
+                  "maePct": 0.634876604401409,
+                  "actualMeanPct": 0.9007272545800218,
+                  "predictionMeanPct": 0.8902194116916793,
+                  "ic": 0.3177046571288934,
+                  "stdRatio": 0.42925667502926756
+                },
+                "SOLUSDT": {
+                  "samples": 654,
+                  "mse": 0.00012593725548723595,
+                  "maePct": 0.8043022102666899,
+                  "actualMeanPct": 1.164349383892999,
+                  "predictionMeanPct": 1.1570737627406096,
+                  "ic": 0.10925260478042485,
+                  "stdRatio": 0.29877090428298547
+                }
+              }
+            },
+            "rollingAbsReturn48": {
+              "samples": 2616,
+              "mse": 8.655960538733503e-05,
+              "maePct": 0.620770959891806,
+              "actualMeanPct": 0.8792097619019353,
+              "predictionMeanPct": 0.8638104996700922,
+              "ic": 0.29453945502140405,
+              "stdRatio": 0.36094548920318664,
+              "bySymbol": {
+                "BTCUSDT": {
+                  "samples": 654,
+                  "mse": 2.8931694501500744e-05,
+                  "maePct": 0.3729411230920032,
+                  "actualMeanPct": 0.5109255388086431,
+                  "predictionMeanPct": 0.5016840114300951,
+                  "ic": 0.1547183908331983,
+                  "stdRatio": 0.23207800256087713
+                },
+                "ETHUSDT": {
+                  "samples": 654,
+                  "mse": 9.508126636485451e-05,
+                  "maePct": 0.6717858791899636,
+                  "actualMeanPct": 0.9408368703260777,
+                  "predictionMeanPct": 0.927576271671836,
+                  "ic": 0.13559092930663239,
+                  "stdRatio": 0.22138369738897234
+                },
+                "BNBUSDT": {
+                  "samples": 654,
+                  "mse": 9.846617511516368e-05,
+                  "maePct": 0.6440412561363151,
+                  "actualMeanPct": 0.9007272545800218,
+                  "predictionMeanPct": 0.8770765985906216,
+                  "ic": 0.28943382293952546,
+                  "stdRatio": 0.3765299683695612
+                },
+                "SOLUSDT": {
+                  "samples": 654,
+                  "mse": 0.00012375928556782116,
+                  "maePct": 0.794315581148942,
+                  "actualMeanPct": 1.164349383892999,
+                  "predictionMeanPct": 1.1489051169878162,
+                  "ic": 0.09737880345462763,
+                  "stdRatio": 0.2222916339497767
+                }
+              }
+            }
+          },
+          "iterations": 481,
+          "score": 0.9536117719862216,
+          "mseImprovement": 0.05363948007220265,
+          "maeImprovement": 0.03913697595535426
+        }
+      ],
+      "score": 0.919421716983775,
+      "mseImprovement": 0.09409950485650793,
+      "maeImprovement": 0.06705706117594223,
+      "eligible": true
+    }
+  ]
+}

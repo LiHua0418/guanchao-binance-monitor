@@ -6,3 +6,7 @@ dist
 .env.*
 .vite
 *.tsbuildinfo
+.venv-training/
+.venv-training-cuda/
+.cache/
+__pycache__/

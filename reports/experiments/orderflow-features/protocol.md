@@ -1,0 +1,23 @@
+# B3 order-flow features: protocol
+
+Recorded before training.
+
+- **createdAt**: 2026-10-08T12:15:18.087780+00:00
+- **cutoffMs**: 1791458027830
+- **objectives**: ['mse', 'mse-direction']
+- **seeds**: [20261008, 20261009, 20261010]
+- **maxEpochs**: 24
+- **cpuThreads**: 6
+- **parameterCount**: 5237
+- **network**: causal Conv1d 12->16 kernel3; unchanged LSTM24, attention and direct cumulative-return head12
+- **features**: ['logReturn1', 'logReturn3', 'logReturn12', 'rangeRatio', 'bodyRatio', 'logVolumeChange', 'sma20Distance', 'sma50Distance', 'takerBuyImbalance', 'logTradeCountChange', 'tradeCountSma20Distance', 'logAverageTradeBaseVolumeChange']
+- **featureDefinitions**: {'takerBuyImbalance': '2 * kline[9] / kline[5] - 1; zero volume -> 0', 'logTradeCountChange': 'log1p(kline[8]_t) - log1p(kline[8]_(t-1))', 'tradeCountSma20Distance': 'trades_t / mean(trades_(t-19)..trades_t) - 1; zero denominator -> 0', 'logAverageTradeBaseVolumeChange': 'log1p(volume_t/max(trades_t,1)) - log1p(volume_(t-1)/max(trades_(t-1),1)); base-asset units before per-feature training-only standardization'}
+- **featureSource**: https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#klinecandlestick-data
+- **causalityChecks**: 16 source cache SHA256s must match original report; no close time >= frozen cutoff; prefix/full feature equivalence; all features/target scalers only train
+- **candidateDefinition**: MSE or MSE+.1 h1 direction BCE; seeds20261008/09/10 each and same-objective equal ensemble; no other candidates
+- **selection**: same validation normalized return MSE .8*h1+.2*mean(h2..12), early-stop6, no shrinkage, no amplitude floor
+- **gate**: h1 validation R2vsZero>0; MSE<trainMean; IC>.02; BA>.5; priceMAE<=flat*1.005; >=2/3 timestamp blocks have positive R2 and IC
+- **holdoutStatus**: same already inspected historical holdout reevaluation; test never chooses objective, epoch, seed, ensemble or gate thresholds
+- **experimentBoundary**: This is the final feature experiment in this request; no additional search after its result.
+- **deployment**: experiment artifacts only; never overwrite public/models; 12 input features and ensemble need runtime support before any future integration
+- **deploymentHashesBefore**: {'b3-15m.json': '432902c5300a568e154abf46991081efcb6790cc05f97008207a0fee87ff27b9', 'b3-1d.json': '45f81d91ae3015f3fd993bf31529ba7b643df5dd090d0c69485b192025d8d30d', 'b3-1h.json': '01ee2a33b42d9434babe15a725a70ca916a2c7150ad18be011ac24e7a13ede5e', 'b3-4h.json': 'cb6b1b3c52067deafd2e76060351150d19ced805b3c1ffded5d219cbaa236acb'}

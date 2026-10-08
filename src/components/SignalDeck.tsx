@@ -1,12 +1,21 @@
+import { useState, type KeyboardEvent } from 'react'
 import { formatCompact, formatPct, formatPrice, formatQty, formatSigned } from '../lib/format'
 import type { Analysis } from '../lib/analysis'
-import type { NeuralForecast } from '../lib/lstm'
+import type { B3Forecast, ReplayPoint } from '../lib/b3'
+import { ModelPanel } from './ModelPanel'
+import { B4Panel } from './B4Panel'
+import type { B4Forecast, B4Status } from '../lib/b4'
 import type { Depth, Quote } from '../types'
 
 type Props = {
+  modelEngine?: 'b3' | 'b4'
+  b4?: { model: B4Forecast | null; status: B4Status; message?: string; retry: () => void }
   analysis: Analysis | null
-  model: NeuralForecast | null
-  training: boolean
+  model: B3Forecast | null
+  modelHistory: ReplayPoint[]
+  modelStatus: 'loading' | 'ready' | 'insufficient' | 'unsupported' | 'error'
+  modelMessage?: string
+  onModelRetry: () => void
   loading: boolean
   quote: Quote | undefined
   depth: Depth | null
@@ -42,7 +51,18 @@ function Spark({ values }: { values: number[] }) {
   )
 }
 
-export function SignalDeck({ analysis, model, training, loading, quote, depth, hero, digits, intervalLabel }: Props) {
+export function SignalDeck({ modelEngine = 'b3', b4, analysis, model, modelHistory, modelStatus, modelMessage, onModelRetry, loading, quote, depth, hero, digits, intervalLabel }: Props) {
+  const views = [{ id: 'model', label: '模型' }, { id: 'technical', label: '技术面' }, { id: 'book', label: '盘口' }] as const
+  const [view, setView] = useState<(typeof views)[number]['id']>('model')
+  const moveTab = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const next = event.key === 'ArrowRight' ? (index + 1) % views.length
+      : event.key === 'ArrowLeft' ? (index + views.length - 1) % views.length
+        : event.key === 'Home' ? 0 : event.key === 'End' ? views.length - 1 : null
+    if (next === null) return
+    event.preventDefault()
+    setView(views[next].id)
+    event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('button')[next]?.focus()
+  }
   const asks = depth ? [...depth.asks].slice(0, 8).reverse() : []
   const bids = depth ? depth.bids.slice(0, 8) : []
   const maxQty = Math.max(1, ...asks.map((level) => level.qty), ...bids.map((level) => level.qty))
@@ -58,41 +78,21 @@ export function SignalDeck({ analysis, model, training, loading, quote, depth, h
   const marker = analysis ? ((analysis.score + analysis.cap) / (analysis.cap * 2)) * 100 : 50
 
   return (
-    <aside className="panel signal">
-      <section className="block">
-        <p className="kicker">预测模型</p>
-        {model ? (
-          <>
-            <div className={`bias model-bias ${model.bias === '看多' ? 'up' : model.bias === '看空' ? 'down' : 'flat'}`}>
-              <strong>{model.bias}</strong>
-              <span>LSTM · {model.params} 个参数</span>
-            </div>
-            <div className="proj">
-              <div>
-                <span>{intervalLabel} · 12 根后模型价格</span>
-                <strong className="num">{formatPrice(model.path.at(-1)?.mid ?? 0, digits)}</strong>
-              </div>
-              <em className={model.endPct >= 0 ? 'up' : 'down'}>{formatPct(model.endPct)}</em>
-            </div>
-            <p className="note">
-              单层 LSTM，16 个隐藏单元，{model.params} 个参数。权重已经在本机训完，用的是 {model.trainedSymbols.join('、')} 共 {model.trainedBars} 根 K 线，停在验证损失最低的第 {model.epochs} 轮，不是打开页面现训的。
-            </p>
-            <p className="note">
-              训练时留出的检验命中 {(model.trainedHitRate * 100).toFixed(0)}%。当前这个交易对最近 {model.holdout} 根命中 {(model.hitRate * 100).toFixed(0)}%，下一根平均误差 {model.maePct.toFixed(2)}%。这都不是以后的胜率。
-            </p>
-            <p className="note quiet">钢蓝虚线是把预测收盘接回去再递推 12 根。越往右越不可靠。点线是残差波动带，不是目标价。</p>
-          </>
-        ) : (
-          <p className="note quiet">
-            {training
-              ? 'LSTM 还在本机训练，验证损失没稳住之前不会结束。'
-              : loading
-                ? 'K 线到齐后才会出模型结果。'
-                : '这个周期的网络还没训练好。'}
-          </p>
-        )}
-      </section>
+    <aside className="panel signal" aria-label="市场观察面板">
+      <div className="inspector-header"><span className="kicker">市场观察</span><span className="inspector-period">{intervalLabel}周期</span></div>
+      <div className="inspector-tabs" role="tablist" aria-label="观察内容">
+        {views.map((item, index) => <button key={item.id} id={`inspector-${item.id}`} role="tab" type="button"
+          aria-selected={view === item.id} aria-controls={`inspector-panel-${item.id}`} tabIndex={view === item.id ? 0 : -1}
+          className={view === item.id ? 'on' : ''} onClick={() => setView(item.id)} onKeyDown={(event) => moveTab(event, index)}>{item.label}</button>)}
+      </div>
+      <div className="inspector-body">
+      <div role="tabpanel" id="inspector-panel-model" aria-labelledby="inspector-model" tabIndex={0} hidden={view !== 'model'}>
+      {modelEngine === 'b4' && b4
+        ? <B4Panel model={b4.model} status={b4.status} message={b4.message} onRetry={b4.retry} intervalLabel={intervalLabel} />
+        : <ModelPanel model={model} history={modelHistory} status={modelStatus} message={modelMessage} onRetry={onModelRetry} intervalLabel={intervalLabel} />}
+      </div>
 
+      <div role="tabpanel" id="inspector-panel-technical" aria-labelledby="inspector-technical" tabIndex={0} hidden={view !== 'technical'}>
       <section className="block">
         <p className="kicker">技术面倾向 · {intervalLabel}</p>
         {analysis ? (
@@ -157,6 +157,8 @@ export function SignalDeck({ analysis, model, training, loading, quote, depth, h
         </div>
       </section>
 
+      </div>
+      <div role="tabpanel" id="inspector-panel-book" aria-labelledby="inspector-book" tabIndex={0} hidden={view !== 'book'}>
       <section className="block">
         <div className="block-title">
           <p className="kicker">买卖盘</p>
@@ -212,6 +214,8 @@ export function SignalDeck({ analysis, model, training, loading, quote, depth, h
         </dl>
         {hero == null && <p className="note quiet">价格还在路上。</p>}
       </section>
+      </div>
+      </div>
     </aside>
   )
 }
